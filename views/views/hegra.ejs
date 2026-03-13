@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Hegra - AlUla</title>
+
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; font-family:Arial, sans-serif; }
+    body, html { height:100%; }
+
+    /* Hero Section */
+    .hero {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      background: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .hero iframe {
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 100vw;
+      height: 56.25vw;
+      min-height: 100vh;
+      min-width: 177.77vh;
+      transform: translate(-50%, -50%);
+    }
+
+    .hero::before {
+      content:"";
+      position:absolute;
+      top:0; left:0;
+      width:100%; height:100%;
+      background:rgba(0,0,0,0.45);
+    }
+
+    .hero h3 {
+      position:relative;
+      font-size:18vw;
+      color:white;
+      font-weight:900;
+      letter-spacing:5px;
+      text-transform:uppercase;
+      text-align:center;
+      line-height:0.9;
+    }
+
+    nav {
+      position:absolute;
+      top:25px;
+      right:40px;
+    }
+
+    nav a {
+      color:white;
+      margin-left:25px;
+      text-decoration:none;
+      font-size:16px;
+      font-weight:bold;
+    }
+
+    .breadcrumb {
+      background:#fff;
+      padding:25px 40px;
+      border-bottom:1px solid #e0e0e0;
+    }
+
+    .breadcrumb-container {
+      max-width:1200px;
+      margin:0 auto;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-size:16px;
+      color:#666;
+    }
+
+    .breadcrumb a {
+      color:#2d5016;
+      text-decoration:none;
+      transition:color 0.3s;
+    }
+    .breadcrumb a:hover { color:#3d6b20; text-decoration:underline; }
+    .breadcrumb span { color:#999; }
+
+
+    /* Content Section */
+    .content-section { background:#fff; padding:80px 40px; }
+    .content-container { max-width:1200px; margin:0 auto; }
+    .content-block { margin-bottom:60px; }
+    .content-block h2 { font-size:48px; color:#222; margin-bottom:15px; font-weight:bold; }
+    .content-block h3 { font-size:32px; color:#555; margin-bottom:25px; font-weight:600; }
+    .content-block p { font-size:18px; line-height:1.9; color:#666; margin-bottom:30px; }
+
+    .content-grid {
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:50px;
+      align-items:center;
+      margin-top:60px;
+    }
+
+    .content-grid img {
+      width:100%; border-radius:8px;
+      box-shadow:0 4px 20px rgba(0,0,0,0.15);
+    }
+
+    .text-content h3 { font-size:32px; color:#222; margin-bottom:20px; font-weight:bold; }
+    .text-content p { font-size:18px; line-height:1.9; color:#666; }
+
+
+    /* Location */
+    .location-section { background:#f9f9f9; padding:80px 40px; }
+    .location-container { max-width:1200px; margin:0 auto; }
+    .location-section h2 { font-size:42px; color:#222; margin-bottom:40px; font-weight:bold; }
+
+    .map-container {
+      position:relative;
+      width:100%; height:500px;
+      border-radius:12px;
+      overflow:hidden;
+      box-shadow:0 4px 20px rgba(0,0,0,0.15);
+    }
+
+    .map-container iframe { width:100%; height:100%; border:0; }
+
+    .map-overlay {
+      position:absolute;
+      bottom:40px; left:50%; transform:translateX(-50%);
+    }
+
+    .map-btn {
+      padding:15px 40px;
+      background:#2d5016; color:white;
+      border:none; border-radius:30px;
+      font-size:16px; font-weight:bold;
+      cursor:pointer;
+      box-shadow:0 4px 15px rgba(45,80,22,0.3);
+      transition:0.3s;
+    }
+    .map-btn:hover {
+      background:#3d6b20;
+      transform:translateY(-2px);
+      box-shadow:0 6px 20px rgba(45,80,22,0.4);
+    }
+
+
+    /* ENHANCED FEEDBACK SECTION */
+    .feedback-wrapper {
+      padding: 80px 40px;
+      background: #fff;
+    }
+
+    .feedback-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .feedback-header {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .feedback-title {
+      font-size: 42px;
+      font-weight: bold;
+      margin-bottom: 15px;
+      color: #222;
+    }
+
+    .feedback-subtitle {
+      font-size: 18px;
+      color: #666;
+    }
+
+    /* Feedback Input Box */
+    .feedback-input-section {
+      background: #f9f9f9;
+      padding: 40px;
+      border-radius: 12px;
+      margin-bottom: 60px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    }
+
+    .feedback-input-section h3 {
+      font-size: 24px;
+      color: #222;
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+
+    #feedback-input {
+      width: 100%;
+      padding: 15px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: 2px solid #e0e0e0;
+      resize: vertical;
+      font-family: Arial, sans-serif;
+      transition: border-color 0.3s;
+    }
+
+    #feedback-input:focus {
+      outline: none;
+      border-color: #2d5016;
+    }
+
+    .feedback-submit-btn {
+      margin-top: 15px;
+      padding: 14px 35px;
+      background: #2d5016;
+      color: #fff;
+      font-weight: bold;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    .feedback-submit-btn:hover {
+      background: #3d6b20;
+      transform: translateY(-2px);
+    }
+
+    /* Feedback Display Section */
+    .feedback-display-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+
+    .feedback-display-header h3 {
+      font-size: 32px;
+      color: #222;
+      font-weight: bold;
+    }
+
+    .view-all-btn {
+      padding: 12px 30px;
+      background: transparent;
+      color: #2d5016;
+      border: 2px solid #2d5016;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    .view-all-btn:hover {
+      background: #2d5016;
+      color: white;
+    }
+
+    /* Testimonial Cards Grid */
+    .feedback-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 30px;
+    }
+
+    .feedback-card {
+      background: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+      border: 1px solid #e0e0e0;
+      transition: 0.3s ease;
+      position: relative;
+    }
+
+    .feedback-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    }
+
+    .stars {
+      display: flex;
+      gap: 5px;
+      margin-bottom: 20px;
+    }
+
+    .star {
+      color: #d4af37;
+      font-size: 20px;
+    }
+    
+    .feedback-text {
+      font-size: 16px;
+      line-height: 1.7;
+      color: #444;
+      margin-bottom: 25px;
+    }
+
+    .feedback-author {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .author-avatar {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #2d5016, #3d6b20);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+      font-size: 20px;
+    }
+
+    .author-info h4 {
+      font-size: 16px;
+      color: #222;
+      font-weight: bold;
+      margin-bottom: 3px;
+    }
+
+    .author-info p {
+      font-size: 14px;
+      color: #666;
+    }
+
+    /* Show More State */
+    .feedback-grid.collapsed {
+      max-height: 500px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .feedback-grid.collapsed::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 100px;
+      background: linear-gradient(transparent, white);
+      pointer-events: none;
+    }
+
+    /* Login Prompt */
+    .login-prompt {
+      background: #fff9e6;
+      border: 2px solid #d4af37;
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .login-prompt p {
+      font-size: 16px;
+      color: #666;
+      margin-bottom: 15px;
+    }
+
+    .login-link {
+      display: inline-block;
+      padding: 12px 30px;
+      background: #2d5016;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .login-link:hover {
+      background: #3d6b20;
+      transform: translateY(-2px);
+    }
+
+
+    /* Contact */
+    .contact-section { padding:80px 60px; background-color:#1a1a1a; text-align:center; }
+    .contact-section h2 { color:#fff; font-size:32px; margin-bottom:20px; }
+
+    .contact-grid {
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
+      gap:30px;
+      margin-top:40px;
+      max-width:1200px;
+      margin-left:auto; margin-right:auto;
+    }
+
+    .contact-box {
+      background:#2c2c2c;
+      padding:40px 30px;
+      border-radius:10px;
+      box-shadow:0 4px 20px rgba(0,0,0,0.3);
+      transition:0.3s ease;
+    }
+    .contact-box:hover { transform:translateY(-5px); }
+    .contact-box h3 { color:#d4af37; margin-bottom:15px; font-size:22px; }
+    .contact-box p { color:#ccc; line-height:1.8; font-size:16px; }
+
+    @media (max-width: 768px) {
+      .feedback-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .feedback-display-header {
+        flex-direction: column;
+        gap: 20px;
+      }
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <div class="hero">
+    <iframe src="https://www.youtube.com/embed/lfJjRteicJI?autoplay=1&mute=1&loop=1&playlist=lfJjRteicJI&controls=0&showinfo=0&rel=0"></iframe>
+
+    <nav>
+      <a href="/">Home</a>
+      <a href="/about">About</a>
+      <a href="/booking">Booking</a>
+      <a href="/login">Login</a>
+      <a href="/contact">Contact</a>
+    </nav>
+
+    <h3>HEGRA</h3>
+  </div>
+
+  <!-- BREADCRUMB -->
+  <div class="breadcrumb">
+    <div class="breadcrumb-container">
+      <a href="/">Home</a><span>|</span>
+      <a href="/tours">Places to go</a><span>|</span>
+      <span>Hegra</span>
+    </div>
+  </div>
+
+  <!-- Content Section --> 
+   <section class="content-section">
+     <div class="content-container"> 
+      <!-- First Content Block -->
+        <div class="content-block"> 
+          <h2>Hegra</h2>
+           <h3>Remembering the past</h3>
+            <p> Reach back into the past and encounter AlUla's ancient cultures and learn about how people lived. Observe expertly carved stone blocks – or betyls – that acted as representations of the gods. Away from Hegra's captivating tombs, this ancient Nabataean city also boasts examples of ancient engineering and craftsmanship such as
+               wells and stone-lined water channels. Defensive walls, gates and towers that once encircled the city show the Roman influence at Hegra. </p>
+               </div>
+                <!-- Image and Text Grid (Image Left, Text Right) --> 
+                 <div class="content-grid">
+                   <!-- Image on Left -->
+                     <div>
+                       <img src="https://s7g10.scene7.com/is/image/rcu/hegra-place-to-go-stack-07?$Responsive$&fit=stretch&fmt=webp&wid=800" alt="Hegra Tombs">
+                       </div> 
+                       <!-- Text on Right -->
+                         <div class="text-content">
+                           <h3>Saudi Arabia's first UNESCO World Heritage Site</h3> 
+                           <p> Populated since before the 1st millennium BCE, Hegra is renowned for its more than 110 well-preserved burial 
+                            tombs carved from desert rock in which the Nabataean elite were laid to rest. Some chambers carry inscriptions describing the person laid within – perhaps a healer, a military figure,
+                             or a local leader. 
+                            </p> 
+                          </div>
+                         </div> 
+                        </div> 
+                      </section>
+
+  <!-- Location Section -->
+    <section class="location-section">
+       <div class="location-container">
+         <h2>Location</h2> 
+         <div class="map-container">
+           <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d28394.561234567!2d37.9511111!3d26.7833333!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x15a6d3c5e4a3b8a9%3A0x5b6c7d8e9f0a1b2c!2sHegra%2C%20AlUla%2C%20Saudi%20Arabia!5e0!3m2!1sen!2s!4v1234567890123!5m2!1sen!2s" allowfullscreen="" loading="lazy">
+             </iframe>
+              <div class="map-overlay">
+                 <button class="map-btn" onclick="openMap()">View Map</button>
+              </div>
+           </div>
+         </div>
+    </section>
+                 
+               
+  <!-- ENHANCED FEEDBACK SECTION -->
+  <section class="feedback-wrapper">
+    <div class="feedback-container">
+      
+      <!-- Header -->
+      <div class="feedback-header">
+        <h2 class="feedback-title">Testimonials</h2>
+        <p class="feedback-subtitle">See what our visitors have to say about their experience at Hegra</p>
+      </div>
+
+      <!-- Feedback Input Section -->
+      <div class="feedback-input-section" id="feedback-input-section">
+        <h3>Share Your Experience</h3>
+        <textarea id="feedback-input" rows="4" placeholder="Tell us about your visit to Hegra..."></textarea>
+        <button class="feedback-submit-btn" onclick="submitFeedback()">Submit Feedback</button>
+      </div>
+
+      <!-- Feedback Display Section -->
+      <div class="feedback-display-header">
+        <h3>What Visitors Say</h3>
+        <button class="view-all-btn" id="view-all-btn" onclick="toggleViewAll()">View All</button>
+      </div>
+
+      <div id="feedback-list" class="feedback-grid collapsed"></div>
+
+    </div>
+  </section>
+
+
+ <!-- CONTACT SECTION -->
+<div class="contact-section">
+  <h2>Need an expert? Leave your info and we'll be in touch shortly</h2>
+  <div class="contact-grid">
+    <div class="contact-box">
+      <h3>VISIT US</h3>
+      <p>Come and visit us at our office and we'll help you with all your needs.<br><br> Alula, Saudi Arabia</p>
+    </div>
+    <div class="contact-box">
+      <h3>CALL US</h3>
+      <p>Feel free to give us a call, we are here to help you.<br><br>+966 55 555 555</p>
+    </div>
+    <div class="contact-box">
+      <h3>CONTACT US</h3>
+      <p>You can also contact us via email or our contact form.<br><br>alula@sa.com</p>
+    </div>
+  </div>
+</div>
+
+
+<script>
+let CURRENT_USER = null;
+let FEEDBACKS_CACHE = [];
+
+async function fetchCurrentUser() {
+  try {
+    const res = await fetch('/api/current-user', { credentials: 'same-origin' });
+    if (!res.ok) {
+      CURRENT_USER = null;
+      return null;
+    }
+    const user = await res.json();
+    CURRENT_USER = user;
+    return user;
+  } catch (err) {
+    console.error('Error fetching current user', err);
+    CURRENT_USER = null;
+    return null;
+  }
+}
+
+function isUserLoggedIn() {
+  if (CURRENT_USER && CURRENT_USER.id) {
+    return true;
+  }
+  const token = localStorage.getItem('userToken');
+  const userData = localStorage.getItem('userData');
+  return token !== null && userData !== null;
+}
+
+function getCurrentUserLocal() {
+  if (CURRENT_USER) return CURRENT_USER;
+  const userData = localStorage.getItem('userData');
+  return userData ? JSON.parse(userData) : null;
+}
+
+function redirectToLogin() {
+  localStorage.setItem('returnUrl', window.location.href);
+  window.location.href = '/login';
+}
+
+function checkReturnFromLogin() {
+  const returnUrl = localStorage.getItem('returnUrl');
+  if (returnUrl && returnUrl === window.location.href) {
+    localStorage.removeItem('returnUrl');
+    const el = document.getElementById('feedback-input-section');
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  }
+}
+
+async function fetchFeedback() {
+  try {
+    const response = await fetch('/api/feedback', { credentials: 'same-origin' });
+    
+    if (!response.ok) {
+      throw new Error('Failed to fetch feedback');
+    }
+    
+    const feedbacks = await response.json();
+    FEEDBACKS_CACHE = Array.isArray(feedbacks) ? feedbacks : [];
+    displayFeedback(FEEDBACKS_CACHE);
+  } catch (error) {
+    console.error('Error fetching feedback:', error);
+    displaySampleFeedback();
+  }
+}
+
+function displayFeedback(feedbacks) {
+  const feedbackList = document.getElementById('feedback-list');
+  feedbackList.innerHTML = '';
+  
+  if (!feedbacks || feedbacks.length === 0) {
+    feedbackList.innerHTML = '<p style="text-align:center; color:#666; grid-column: 1/-1;">No testimonials yet. Be the first to share your experience!</p>';
+    return;
+  }
+  
+  feedbacks.forEach(feedback => {
+    const card = createFeedbackCard(feedback);
+    feedbackList.appendChild(card);
+  });
+}
+
+function createFeedbackCard(feedback) {
+  const card = document.createElement('div');
+  card.className = 'feedback-card';
+  
+  const initial = feedback.username ? feedback.username.charAt(0).toUpperCase() : 'U';
+  const stars = '<div class="stars">' + '★'.repeat(5).split('').map(s => `<span class="star">${s}</span>`).join('') + '</div>';
+  
+  card.innerHTML = `
+    ${stars}
+    <p class="feedback-text">${escapeHtml(feedback.comment)}</p>
+    <div class="feedback-author">
+      <div class="author-avatar">${initial}</div>
+      <div class="author-info">
+        <h4>${escapeHtml(feedback.username || 'Anonymous Visitor')}</h4>
+        <p>${formatDate(feedback.created_at)}</p>
+      </div>
+    </div>
+  `;
+  
+  return card;
+}
+
+async function submitFeedback() {
+  console.log('🔍 التحقق من تسجيل الدخول...');
+  
+  if (!isUserLoggedIn()) {
+    console.log('⚠️ المستخدم غير مسجل، محاولة الحصول على البيانات من السيرفر...');
+    await fetchCurrentUser();
+    if (!isUserLoggedIn()) {
+      console.log('❌ المستخدم غير مسجل دخول');
+      showLoginPrompt();
+      return;
+    }
+  }
+  
+  const feedbackInput = document.getElementById('feedback-input');
+  if (!feedbackInput) {
+    console.log('❌ حقل الإدخال غير موجود');
+    showLoginPrompt();
+    return;
+  }
+  
+  const feedbackText = feedbackInput.value.trim();
+  console.log('📝 النص المدخل:', feedbackText);
+  
+  if (!feedbackText) {
+    alert('الرجاء كتابة رأيك قبل الإرسال!');
+    return;
+  }
+  
+  const currentUser = getCurrentUserLocal();
+  console.log('👤 بيانات المستخدم:', currentUser);
+  
+  if (!currentUser || !currentUser.email) {
+    alert('حدث خطأ في تحديد المستخدم. الرجاء تسجيل الدخول مرة أخرى.');
+    redirectToLogin();
+    return;
+  }
+  
+  const userIdentifier = currentUser.email || currentUser.id;
+  const alreadyPosted = FEEDBACKS_CACHE.some(f => {
+    if (!f.user_id) return false;
+    return String(f.user_id) === String(userIdentifier);
+  });
+  
+  if (alreadyPosted) {
+    alert('لقد قمت بإرسال رأيك مسبقاً. شكراً لك!');
+    return;
+  }
+  
+  try {
+    console.log('📤 إرسال البيانات إلى السيرفر...');
+    
+    const dataToSend = {
+      comment: feedbackText
+    };
+    console.log('📦 البيانات المرسلة:', dataToSend);
+    
+    const response = await fetch('/api/feedback', {
+      method: 'POST',
+      credentials: 'same-origin',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(dataToSend)
+    });
+    
+    console.log('📡 حالة الاستجابة:', response.status);
+    
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.log('❌ رسالة الخطأ:', errorText);
+      
+      if (response.status === 409) {
+        alert('لقد قمت بإرسال رأيك مسبقاً.');
+        await fetchFeedback();
+        return;
+      }
+      if (response.status === 401) {
+        alert('انتهت جلستك. الرجاء تسجيل الدخول مرة أخرى.');
+        redirectToLogin();
+        return;
+      }
+      throw new Error(`Server error: ${response.status}`);
+    }
+    
+    const result = await response.json();
+    console.log('✅ استجابة السيرفر:', result);
+    
+    feedbackInput.value = '';
+    alert('شكراً لك على مشاركة رأيك! ✅');
+    await fetchFeedback();
+    console.log('✅ تم الإرسال بنجاح!');
+    
+  } catch (error) {
+    console.error('❌ خطأ في الإرسال:', error);
+    alert('حدث خطأ في إرسال رأيك. الرجاء المحاولة مرة أخرى.');
+  }
+}
+
+function showLoginPrompt() {
+  const inputSection = document.getElementById('feedback-input-section');
+  inputSection.innerHTML = `
+    <div class="login-prompt">
+      <p>Please log in to share your experience at Hegra</p>
+      <a href="#" class="login-link" onclick="event.preventDefault(); redirectToLogin();">Login to Continue</a>
+    </div>
+  `;
+}
+
+function restoreFeedbackInput() {
+  const inputSection = document.getElementById('feedback-input-section');
+  inputSection.innerHTML = `
+    <h3>Share Your Experience</h3>
+    <textarea id="feedback-input" rows="4" placeholder="Tell us about your visit to Hegra..."></textarea>
+    <button class="feedback-submit-btn" onclick="submitFeedback()">Submit Feedback</button>
+  `;
+}
+
+function toggleViewAll() {
+  const feedbackList = document.getElementById('feedback-list');
+  const btn = document.getElementById('view-all-btn');
+  
+  if (feedbackList.classList.contains('collapsed')) {
+    feedbackList.classList.remove('collapsed');
+    btn.textContent = 'Show Less';
+  } else {
+    feedbackList.classList.add('collapsed');
+    btn.textContent = 'View All';
+  }
+}
+
+function escapeHtml(text) {
+  const div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
+}
+
+function formatDate(dateString) {
+  if (!dateString) return 'Recently';
+  const date = new Date(dateString);
+  const now = new Date();
+  const diffTime = Math.abs(now - date);
+  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+  
+  if (diffDays === 0) return 'Today';
+  if (diffDays === 1) return 'Yesterday';
+  if (diffDays < 7) return `${diffDays} days ago`;
+  if (diffDays < 30) return `${Math.floor(diffDays / 7)} weeks ago`;
+  return date.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+}
+
+function displaySampleFeedback() {
+  const sampleData = [
+    {
+      username: 'Sarah Al-Mohammed',
+      comment: 'Hegra is simply breathtaking! The ancient tombs are incredibly well-preserved and the history here is palpable. A must-visit destination in Saudi Arabia.',
+      created_at: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString()
+    },
+    {
+      username: 'James Wilson',
+      comment: 'I was hesitant to visit at first, but I\'m so glad I did - it exceeded all my expectations. The UNESCO World Heritage site is truly remarkable.',
+      created_at: new Date(Date.now() - 12 * 24 * 60 * 60 * 1000).toISOString()
+    },
+    {
+      username: 'Fatima Abdullah',
+      comment: 'An unforgettable experience! The combination of natural beauty and historical significance makes Hegra one of the most impressive sites I\'ve ever visited.',
+      created_at: new Date(Date.now() - 20 * 24 * 60 * 60 * 1000).toISOString()
+    }
+  ];
+  
+  FEEDBACKS_CACHE = sampleData;
+  displayFeedback(sampleData);
+}
+
+function openMap() {
+  window.open('https://www.google.com/maps/place/Hegra,+AlUla,+Saudi+Arabia', '_blank');
+}
+
+window.onload = async function() {
+  checkReturnFromLogin();
+  await fetchCurrentUser();
+  
+  if (!isUserLoggedIn()) {
+    showLoginPrompt();
+  } else {
+    restoreFeedbackInput();
+  }
+  
+  await fetchFeedback();
+};
+</script>
+
+</body>
+</html>

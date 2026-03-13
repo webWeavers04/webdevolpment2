@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Discover AlUla</title>
+
+  <style>
+    * { 
+      margin:0; 
+      padding:0; 
+      box-sizing:border-box;
+      font-family:Arial, sans-serif;
+     }
+    body, html { 
+      height:100%;
+      background:#f9f9f9; 
+    }
+
+    nav {
+      position:fixed;
+      top:25px;
+      right:40px;
+      z-index:1000;
+    }
+
+    nav a {
+      color:white;
+      margin-left:25px;
+      text-decoration:none;
+      font-size:16px;
+      font-weight:bold;
+      transition:0.3s;
+    }
+
+    nav a:hover { opacity:0.7; }
+
+    .hero {
+      position:relative;
+      width:100%;
+      height:60vh;
+      background:url('https://s7g10.scene7.com/is/image/rcu/hegra-place-to-go-stack-07?$Responsive$&fit=stretch&fmt=webp&wid=1920') center/cover no-repeat;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+    }
+
+    .hero::before {
+      content:"";
+      position:absolute;
+      top:0; left:0;
+      width:100%;
+      height:100%;
+      background:rgba(0,0,0,0.45);
+    }
+
+    .hero h1 {
+      position:relative;
+      font-size:10vw;
+      color:white;
+      font-weight:900;
+      letter-spacing:8px;
+      text-transform:uppercase;
+      z-index:2;
+    }
+
+    .places-section { 
+      max-width:1300px;
+      margin:0 auto;
+      padding:80px 40px;
+    }
+    .places-section h2 {
+       font-size:42px; 
+       margin-bottom:25px; 
+       color:#222; 
+       margin-bottom:25px;
+       text-transform:capitalize;
+    }
+    .places-section .description {
+      max-width:1000px;
+      color:#555;
+      line-height:1.8;
+      margin-bottom:60px;
+     }
+
+    .carousel-wrapper 
+    { position:relative; 
+      margin-bottom:80px; 
+    }
+    .carousel {
+      display:flex; 
+      gap:30px; 
+      overflow-x:auto;
+      scroll-behavior:smooth; 
+      padding:20px 5px;
+      scrollbar-width:thin;
+      scrollbar-color:#ccc transparent;
+    }
+
+    .carousel::-webkit-scrollbar {
+      height:8px;
+    }
+
+    .carousel::-webkit-scrollbar-track {
+      background:transparent;
+    }
+
+    .carousel::-webkit-scrollbar-thumb {
+      background:#ccc;
+      border-radius:10px;
+    }
+    .slide {
+      min-width:350px; 
+      height:480px; 
+      border-radius:8px;
+      overflow:hidden; 
+      position:relative; 
+      cursor:pointer;
+      box-shadow:0 4px 20px rgba(0,0,0,0.15);
+      transition:0.3s; 
+      flex-shrink:0;
+    }
+
+    .slide img { 
+      width:100%; 
+      height:100%; 
+      object-fit:cover;
+     }
+     .slide:hover {
+      transform:scale(1.03);
+      box-shadow:0 8px 30px rgba(0,0,0,0.25);
+    }
+
+    .slide::before {
+      content:""; position:absolute; top:0; left:0;
+      width:100%; height:100%;
+      background:linear-gradient(to bottom, transparent 50%, rgba(0,0,0,0.75));
+      z-index:1;
+    }
+
+    .slide-content {
+      position:absolute; bottom:0; padding:25px; z-index:2; color:white;
+    }
+
+
+    .events-map-section { max-width:1300px; margin:80px auto; padding:0 40px; }
+    .events-map-section h2 { font-size:42px; margin-bottom:20px; }
+
+    .filter-section select {
+      padding:10px 15px; border-radius:8px; border:2px solid #ddd; font-size:16px;
+    }
+
+    .events-map-grid {
+      display:grid;
+      grid-template-columns:60% 35%;
+      gap:5%;
+      align-items:flex-start;
+    }
+
+    .event-card {
+      background:white;
+      border-radius:12px;
+      overflow:hidden;
+      width:48%;
+      display:inline-block;
+      vertical-align:top;
+      margin-bottom:25px;
+      margin-right:2%;
+      box-shadow:0 3px 12px rgba(0,0,0,0.1);
+      cursor:pointer;
+      transition:0.3s;
+      position:relative;
+      white-space:normal;
+      height: 500px; /* تحديد ارتفاع موحد */
+      overflow: hidden; /* منع تجاوز المحتوى */
+
+    }
+    
+    #eventsList {
+      white-space:nowrap;
+      overflow-x:auto;
+      scroll-behavior:smooth;
+    }
+
+    .event-card img { width:100%; height:260px; object-fit:cover; }
+
+    .event-card-content { padding:15px; }
+    .event-badge {
+      display:inline-block; font-size:11px; background:#eee;
+      padding:4px 12px; border-radius:4px;
+      margin-bottom:8px;
+    }
+
+    .event-price { color:#d4af37; font-weight:bold; }
+
+    .event-fav {
+      position:absolute;
+      top:15px;
+      right:15px;
+      z-index:10;
+      width:45px;
+      height:45px;
+      border-radius:50%;
+      border:2px solid white;
+      background:rgba(255,255,255,0.25);
+      backdrop-filter:blur(7px);
+      cursor:pointer;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      transition:0.3s;
+    }
+/* Favorite Button */
+    .favorite-btn {
+      position:absolute;
+      top:20px;
+      right:20px;
+      z-index:3;
+      background:rgba(255,255,255,0.25);
+      border:2px solid white;
+      border-radius:50%;
+      width:48px;
+      height:48px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      cursor:pointer;
+      transition:all 0.3s ease;
+      backdrop-filter:blur(8px);
+    }
+
+    .favorite-btn:hover {
+      background:rgba(255,255,255,0.4);
+      transform:scale(1.1);
+    }
+
+    .favorite-btn.active {
+      background:rgba(220,38,38,0.9);
+      border-color:#dc2626;
+    }
+
+    .favorite-btn svg {
+      width:22px;
+      height:22px;
+    }
+
+    .favorite-btn path {
+      fill:none;
+      stroke:white;
+      stroke-width:2;
+      transition:fill 0.3s ease;
+    }
+
+    .favorite-btn.active path {
+      fill:white;
+      stroke:white;
+    }
+
+    /* Navigation Arrows (Optional) */
+    .nav-arrow {
+      position:absolute;
+      top:50%;
+      transform:translateY(-50%);
+      background:rgba(255,255,255,0.9);
+      border:none;
+      border-radius:50%;
+      width:50px;
+      height:50px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      cursor:pointer;
+      z-index:10;
+      box-shadow:0 4px 15px rgba(0,0,0,0.2);
+      transition:all 0.3s ease;
+    }
+
+    .nav-arrow:hover {
+      background:white;
+      transform:translateY(-50%) scale(1.1);
+    }
+
+    .nav-arrow.left {
+      left:-25px;
+    }
+
+    .nav-arrow.right {
+      right:-25px;
+    }
+
+    .nav-arrow svg {
+      width:24px;
+      height:24px;
+      fill:#333;
+    }
+    .event-fav svg {
+      width:22px;
+      height:22px;
+    }
+
+    .event-fav svg path {
+      fill:rgba(255,255,255,0.6);
+      transition:0.3s;
+    }
+
+    .event-fav:hover svg path {
+      fill:#dc2626;
+    }
+
+    .event-fav.active {
+      background:#dc2626;
+      border-color:#dc2626;
+    }
+
+    .event-fav.active svg path {
+      fill:white;
+    }
+
+    .book-btn {
+      margin-top:12px;
+      padding:10px 18px;
+      background:#d4af37;
+      color:white;
+      border:none;
+      border-radius:6px;
+      font-size:14px;
+      cursor:pointer;
+      transition:0.3s;
+      width:100%;
+    }
+
+    .book-btn:hover { opacity:0.8; }
+
+    .map-container-interactive {
+      width:100%; height:600px; border-radius:12px;
+      overflow:hidden;
+      box-shadow:0 4px 20px rgba(0,0,0,0.15);
+    }
+
+    .map-container-interactive iframe {
+      width:100%;
+      height:100%;
+      border:0;
+    }
+
+    /* Contact Section */
+    .contact-section {
+      padding:80px 60px;
+      background-color:#1a1a1a;
+      text-align:center;
+    }
+
+    .contact-section h2 {
+      color:#ffffff;
+      font-size:32px;
+      margin-bottom:20px;
+    }
+
+    .contact-grid {
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
+      gap:30px;
+      margin-top:40px;
+      max-width:1200px;
+      margin-left:auto;
+      margin-right:auto;
+    }
+
+    .contact-box {
+      background-color:#2c2c2c;
+      padding:40px 30px;
+      border-radius:10px;
+      box-shadow:0 4px 20px rgba(0,0,0,0.3);
+      transition:transform 0.3s ease;
+    }
+
+    .contact-box:hover {
+      transform:translateY(-5px);
+    }
+
+    .contact-box h3 {
+      color:#d4af37;
+      margin-bottom:15px;
+      font-size:22px;
+    }
+
+    .contact-box p {
+      color:#ccc;
+      line-height:1.8;
+      font-size:16px;
+    }
+
+    @media(max-width:900px) {
+      .events-map-grid { grid-template-columns:1fr; }
+      .event-card { width:100%; margin-right:0; }
+    }
+    
+      
+      .slide {
+        min-width:300px;
+        height:420px;
+      }
+
+      .places-section {
+        padding:50px 20px;
+      }
+
+      .nav-arrow {
+        display:none;
+      }
+    
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="/">Home</a>
+    <a href="/about">About</a>
+    <a href="/booking">Booking</a>
+    <a href="/contact">Contact</a>
+    <a href="/profile" class="profile-icon" title="Profile">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+        </a>
+  </nav>
+
+  <div class="hero">
+    <h1>DISCOVER ALULA</h1>
+  </div>
+
+  <section class="places-section">
+    <h2>Places to go</h2>
+    <p class="description">
+      From the ancient tombs of Dadan, and the UNESCO World Heritage Site of Hegra, to the modern-day mirrored marvels within its valley, AlUla's natural and man-made landscapes are the most alluring in the world, all waiting to be discovered.
+    </p>
+
+    <div class="carousel-wrapper">
+      <div class="carousel" id="carousel-places">
+
+        <div class="slide" onclick="goToPlace('hegra')">
+                    <img src="https://s7g10.scene7.com/is/image/rcu/hegra-place-to-go-stack-07?$Responsive$&fit=stretch&fmt=webp&wid=1920">
+                    <button class="favorite-btn" onclick="toggleFavorite(event, 0)">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1a5.5 5.5 0 0 0-7.8 7.8L12 21l7.8-7.8a5.5 5.5 0 0 0 0-7.8z"/>
+                        </svg>
+                    </button>
+                    <div class="slide-content">
+                        <h3>Hegra</h3>
+                        <p>UNESCO World Heritage Site</p>
+                    </div>
+                </div>
+
+                <div class="slide" onclick="goToPlace('maraya')">
+                    <img src="https://www.commercialinteriordesign.com/cloud/2024/04/03/Maraya-4.jpg">
+                    <button class="favorite-btn" onclick="toggleFavorite(event, 1)">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1a5.5 5.5 0 0 0-7.8 7.8L12 21l7.8-7.8a5.5 5.5 0 0 0 0-7.8z"/>
+                        </svg>
+                    </button>
+                    <div class="slide-content">
+                        <h3>Maraya</h3>
+                        <p>Mirrored marvel in the desert</p>
+                    </div>
+                </div>
+
+                <div class="slide" onclick="goToPlace('elephant-rock')">
+                    <img src="https://s7g10.scene7.com/is/image/rcu/elephant-rock-place-to-go-hero-01?$Responsive$&fit=stretch&fmt=webp&wid=1920">
+                    <button class="favorite-btn" onclick="toggleFavorite(event, 2)">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1a5.5 5.5 0 0 0-7.8 7.8L12 21l7.8-7.8a5.5 5.5 0 0 0 0-7.8z"/>
+                        </svg>
+                    </button>
+                    <div class="slide-content">
+                        <h3>Elephant Rock</h3>
+                        <p>Nature's magnificent sculpture</p>
+                    </div>
+                </div>
+
+                <div class="slide" onclick="goToPlace('oasis')">
+                    <img src="https://www.experiencealula.com/content/dam/rcudxp/global/places-to-go/oasis/experience-card/oasis-place-to-go-card-01.jpg">
+                    <button class="favorite-btn" onclick="toggleFavorite(event, 3)">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1a5.5 5.5 0 0 0-7.8 7.8L12 21l7.8-7.8a5.5 5.5 0 0 0 0-7.8z"/>
+                        </svg>
+                    </button>
+                    <div class="slide-content">
+                        <h3>The Oasis</h3>
+                        <p>A nourishing lifeline</p>
+                    </div>
+                </div>
+
+                <div class="slide" onclick="goToPlace('aljadidah')">
+                    <img src="https://s7g10.scene7.com/is/image/rcu/aljadidah-place-to-go-hero-01?$Responsive$&fit=stretch&fmt=webp&wid=1024">
+                    <button class="favorite-btn" onclick="toggleFavorite(event, 4)">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1a5.5 5.5 0 0 0-7.8 7.8L12 21l7.8-7.8a5.5 5.5 0 0 0 0-7.8z"/>
+                        </svg>
+                    </button>
+                    <div class="slide-content">
+                        <h3>AlJadidah Arts District</h3>
+                        <p>Art is everywhere</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+  <section class="events-map-section">
+    <h2>Top Things To Do</h2>
+
+    <div class="filter-section">
+      <label>Category:</label>
+      <select id="eventFilter" onchange="filterEvents()">
+        <option value="all">All</option>
+        <option value="concerts">Concerts</option>
+        <option value="adventure">Adventure</option>
+        <option value="art">Art</option>
+      </select>
+    </div>
+
+    <div class="events-map-grid">
+
+      <div id="eventsList">
+
+        <div class="event-card" data-category="concerts" data-event-id="elissa2025">
+          <img src="https://s7g10.scene7.com/is/image/rcu/Elissa-Hero-mobile-752x936?$Responsive$">
+
+          <button class="event-fav" onclick="toggleEventFavorite(event,'elissa2025')">
+            <svg viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1a5.5 5.5 0 0 0-7.8 7.8L12 21l7.8-7.8a5.5 5.5 0 0 0 0-7.8z"/></svg>
+          </button>
+
+          <div class="event-card-content">
+            <span class="event-badge">Concert</span>
+            <h3>Elissa Concert</h3>
+            <p class="event-date">December 2025</p>
+            <p>Live performance in magical AlUla atmosphere.</p>
+            <p class="event-price">From SAR 350</p>
+
+            <button class="book-btn" onclick="goBook()">Book Now →</button>
+          </div>
+        </div>
+
+        <div class="event-card" data-category="adventure" data-event-id="polo2026">
+          <img src="https://s7g10.scene7.com/is/image/rcu/alula-aurora-sg-desert-polo-elephant-rock-hero-2880x1620-1?$Responsive$">
+
+          <button class="event-fav" onclick="toggleEventFavorite(event,'polo2026')">
+            <svg viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1a5.5 5.5 0 0 0-7.8 7.8L12 21l7.8-7.8a5.5 5.5 0 0 0 0-7.8z"/></svg>
+          </button>
+
+          <div class="event-card-content">
+            <span class="event-badge">Adventure</span>
+            <h3>AlUla Desert Polo 2026</h3>
+            <p class="event-date">16–17 Jan 2026</p>
+            <p>Prestigious polo experience with a desert backdrop.</p>
+            <p class="event-price">From SAR 400</p>
+
+            <button class="book-btn" onclick="goBook()">Book Now →</button>
+          </div>
+        </div>
+
+        <div class="event-card" data-category="art" data-event-id="maraya-tour">
+          <img src="https://s7g10.scene7.com/is/image/rcu/maraya-tour-hero-2880x1620?$Responsive$">
+
+          <button class="event-fav" onclick="toggleEventFavorite(event,'maraya-tour')">
+            <svg viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1a5.5 5.5 0 0 0-7.8 7.8L12 21l7.8-7.8a5.5 5.5 0 0 0 0-7.8z"/></svg>
+          </button>
+
+          <div class="event-card-content">
+            <span class="event-badge">Art</span>
+            <h3>Maraya Tour</h3>
+            <p class="event-date">Available year-round</p>
+            <p>Explore the world's largest mirrored building.</p>
+            <p class="event-price">From SAR 150</p>
+
+            <button class="book-btn" onclick="goBook()">Book Now →</button>
+          </div>
+        </div>
+
+        <div class="event-card" data-category="adventure" data-event-id="stars">
+          <img src="https://s7g10.scene7.com/is/image/rcu/magical-journey-among-the-stars-desktop-2880x1620?$Responsive$">
+
+          <button class="event-fav" onclick="toggleEventFavorite(event,'stars')">
+            <svg viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1a5.5 5.5 0 0 0-7.8 7.8L12 21l7.8-7.8a5.5 5.5 0 0 0 0-7.8z"/></svg>
+          </button>
+
+          <div class="event-card-content">
+            <span class="event-badge">Adventure</span>
+            <h3>A Magical Journey Among the Stars</h3>
+            <p class="event-date">2 hours • Selected nights</p>
+            <p>Hear magical stories under the stars.</p>
+            <p class="event-price">From SAR 275</p>
+
+            <button class="book-btn" onclick="goBook()">Book Now →</button>
+          </div>
+        </div>
+
+        <div class="event-card" data-category="adventure" data-event-id="balloon">
+          <img src="https://s7g10.scene7.com/is/image/rcu/hot-air-balloon-hero-02?$Responsive$">
+
+          <button class="event-fav" onclick="toggleEventFavorite(event,'balloon')">
+            <svg viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1a5.5 5.5 0 0 0-7.8 7.8L12 21l7.8-7.8a5.5 5.5 0 0 0 0-7.8z"/></svg>
+          </button>
+
+          <div class="event-card-content">
+            <span class="event-badge">Adventure</span>
+            <h3>Hot Air Balloon Ride</h3>
+            <p class="event-date">Daily – Sunrise</p>
+            <p>Breathtaking flight over AlUla mountains.</p>
+            <p class="event-price">From SAR 500</p>
+
+            <button class="book-btn" onclick="goBook()">Book Now →</button>
+          </div>
+        </div>
+
+        <div class="event-card" data-category="adventure" data-event-id="zipline">
+          <img src="https://s7g10.scene7.com/is/image/rcu/alula-zipline-hero-final?$Responsive$">
+
+          <button class="event-fav" onclick="toggleEventFavorite(event,'zipline')">
+            <svg viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1a5.5 5.5 0 0 0-7.8 7.8L12 21l7.8-7.8a5.5 5.5 0 0 0 0-7.8z"/></svg>
+          </button>
+
+          <div class="event-card-content">
+            <span class="event-badge">Adventure</span>
+            <h3>AlUla Zipline</h3>
+            <p class="event-date">30 minutes • Daily</p>
+            <p>Experience an adrenaline rush through the canyon.</p>
+            <p class="event-price">From SAR 200</p>
+
+            <button class="book-btn" onclick="goBook()">Book Now →</button>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="map-container-interactive">
+        <iframe 
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d113578!2d37.8!3d26.7!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x15a6d3c5e4a3b8a9%3A0x5b6c7d8e9f0a1b2c!2sAlUla%2C%20Saudi%20Arabia!5e0!3m2!1sen!2s!4v1234567890123!5m2!1sen!2s"
+          allowfullscreen=""
+          loading="lazy">
+        </iframe>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="contact-section">
+    <h2>Need an expert? Leave your info and we'll be in touch shortly</h2>
+    <div class="contact-grid">
+      <div class="contact-box">
+        <h3>VISIT US</h3>
+        <p>Come and visit us at our office and we'll help you with all your needs.<br><br>Alula, Saudi Arabia</p>
+      </div>
+      <div class="contact-box">
+        <h3>CALL US</h3>
+        <p>Feel free to give us a call, we are here to help you.<br><br>+966 55 555 555</p>
+      </div>
+      <div class="contact-box">
+        <h3>CONTACT US</h3>
+        <p>You can also contact us via email or our contact form.<br><br>alula@sa.com</p>
+      </div>
+    </div>
+  </section>
+
+<script>
+// ============================================
+// دالة اللايك للأماكن (Places)
+// ============================================
+async function toggleFavorite(event, index) {
+  event.stopPropagation();
+  
+  const places = [
+    { name: 'Hegra', date: 'UNESCO World Heritage Site', location: 'AlUla' },
+    { name: 'Maraya', date: 'Year-round', location: 'AlUla' },
+    { name: 'Elephant Rock', date: 'Year-round', location: 'AlUla' },
+    { name: 'The Oasis', date: 'Year-round', location: 'AlUla' },
+    { name: 'AlJadidah Arts District', date: 'Year-round', location: 'AlUla' }
+  ];
+  
+  const place = places[index];
+  const btn = event.currentTarget;
+  
+  try {
+    const response = await fetch('/api/toggle-like', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        eventName: place.name,
+        eventDate: place.date,
+        eventLocation: place.location
+      })
+    });
+    
+    const data = await response.json();
+    
+    if (data.success) {
+      btn.classList.toggle('active');
+      showNotification(data.message, 'success');
+    } else if (response.status === 401) {
+      localStorage.setItem('returnUrl', window.location.pathname);
+      showNotification('Please login to add favorites', 'warning');
+      setTimeout(() => window.location.href = '/login', 1500);
+    }
+  } catch (err) {
+    showNotification('Connection error', 'error');
+  }
+}
+
+// ============================================
+// دالة اللايك للفعاليات (Events)
+// ============================================
+async function toggleEventFavorite(e, eventId) {
+  e.stopPropagation();
+  
+  const events = {
+    'elissa2025': { name: 'Elissa Concert', date: 'December 2025', location: 'AlUla' },
+    'polo2026': { name: 'AlUla Desert Polo 2026', date: '16–17 Jan 2026', location: 'AlUla' },
+    'maraya-tour': { name: 'Maraya Tour', date: 'Available year-round', location: 'AlUla' },
+    'stars': { name: 'A Magical Journey Among the Stars', date: 'Selected nights', location: 'AlUla' },
+    'balloon': { name: 'Hot Air Balloon Ride', date: 'Daily – Sunrise', location: 'AlUla' },
+    'zipline': { name: 'AlUla Zipline', date: 'Daily', location: 'AlUla' }
+  };
+  
+  const event = events[eventId];
+  const btn = e.currentTarget;
+  
+  try {
+    const response = await fetch('/api/toggle-like', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        eventName: event.name,
+        eventDate: event.date,
+        eventLocation: event.location
+      })
+    });
+    
+    const data = await response.json();
+    
+    if (data.success) {
+      btn.classList.toggle('active');
+      showNotification(data.message, 'success');
+    } else if (response.status === 401) {
+      localStorage.setItem('returnUrl', window.location.pathname);
+      showNotification('Please login', 'warning');
+      setTimeout(() => window.location.href = '/login', 1500);
+    }
+  } catch (err) {
+    showNotification('Error', 'error');
+  }
+}
+
+// عرض الإشعارات
+function showNotification(message, type = 'success') {
+  const old = document.querySelector('.toast-notification');
+  if (old) old.remove();
+  
+  const toast = document.createElement('div');
+  toast.textContent = message;
+  toast.className = 'toast-notification';
+  
+  const colors = {
+    success: '#4caf50',
+    error: '#f44336',
+    warning: '#ff9800'
+  };
+  
+  toast.style.cssText = `
+    position: fixed; top: 20px; right: 20px;
+    background: ${colors[type]}; color: white;
+    padding: 15px 25px; border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    z-index: 9999; font-weight: bold;
+    animation: slideIn 0.3s ease;
+  `;
+  
+  document.body.appendChild(toast);
+  setTimeout(() => toast.remove(), 3000);
+}
+
+async function loadUserLikes() {
+  try {
+    const response = await fetch('/api/my-likes');
+    if (response.ok) {
+      const data = await response.json();
+      if (data.success) {
+        data.favorites.forEach(fav => {
+          document.querySelectorAll('.event-card, .slide').forEach(card => {
+            const title = card.querySelector('h3')?.textContent.trim();
+            if (title === fav.event_name) {
+              const btn = card.querySelector('.event-fav, .favorite-btn');
+              if (btn) btn.classList.add('active');
+            }
+          });
+        });
+      }
+    }
+  } catch (err) {
+    console.log('User not logged in');
+  }
+}
+
+function goToPlace(place) {
+  window.location.href = `/place/${place}`;
+}
+
+function goBook() {
+  window.location.href = '/booking';
+}
+
+function filterEvents() {
+  const filter = document.getElementById('eventFilter').value;
+  const cards = document.querySelectorAll('.event-card');
+  
+  cards.forEach(card => {
+    if (filter === 'all' || card.dataset.category === filter) {
+      card.style.display = 'inline-block';
+    } else {
+      card.style.display = 'none';
+    }
+  });
+}
+
+document.addEventListener('DOMContentLoaded', loadUserLikes);
+</script>
+
+<style>
+@keyframes slideIn {
+  from { transform: translateX(400px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+</style>
+
+</body>
+</html>

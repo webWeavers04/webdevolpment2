@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Contact Us – AlUla</title>
+<style>
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #1a1a1a;
+    color: #fff;
+  }
+  .hero {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    background-image: url('https://www.sellingtravel.co.uk/wp-content/uploads/2023/10/Oasis-Heritage-Trail-lead.jpg');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .hero::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.45);
+    z-index: 1;
+  }
+          /* top nav */
+        nav {
+            position: absolute;
+            top:15px;
+            right: 40px;
+            z-index: 10;
+        }
+
+        nav a {
+            color: white;
+            margin-left: 25px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #d4af37;
+        }
+
+        nav a.profile-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8px;
+            transition: all 0.3s;
+        }
+
+        nav a.profile-icon:hover {
+            transform: scale(1.1);
+        }
+
+        nav a.profile-icon svg {
+            transition: all 0.3s;
+        }
+
+        nav a.profile-icon:hover svg {
+            stroke: #d4af37;
+        }
+
+  .hero h1 {
+    position: relative;
+    font-size: 48px;
+    color: #fff;
+    text-align: center;
+    z-index: 2;
+  }
+  .contact-section {
+    padding: 60px;
+    background-color: #1a1a1a;
+    text-align: center;
+  }
+  .contact-section h2 {
+    color: #ffffff;
+    margin-bottom: 20px;
+  }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+  }
+  .contact-box {
+    background-color: #2c2c2c;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  }
+  .contact-box h3 {
+    color: #d4af37;
+    margin-bottom: 15px;
+  }
+  .contact-box p {
+    color: #ccc;
+    line-height: 1.6;
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="hero">
+   <!-- Navigation -->
+    <nav>
+        <a href="/">Home</a>
+        <a href="/about">About</a>
+        <a href="/booking">Booking</a>
+        <a href="/login">Login</a>
+        <a href="/contact">Contact</a>
+        <a href="/profile" class="profile-icon" title="Profile">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+        </a>
+    </nav>
+
+  <h1>CONTACT US</h1>
+</div>
+
+<!-- CONTACT SECTION -->
+<div class="contact-section">
+  <h2>Need an expert? Leave your info and we’ll be in touch shortly</h2>
+  <div class="contact-grid">
+    <div class="contact-box">
+      <h3>VISIT US</h3>
+      <p>Come and visit us at our office and we’ll help you with all your needs.<br><br> Alula, Saudi Arabia</p>
+    </div>
+    <div class="contact-box">
+      <h3>CALL US</h3>
+      <p>Feel free to give us a call, we are here to help you.<br><br>+966 55 555 555</p>
+    </div>
+    <div class="contact-box">
+      <h3>CONTACT US</h3>
+      <p>You can also contact us via email or our contact form.<br><br>alula@sa.com</p>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

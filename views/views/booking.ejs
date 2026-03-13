@@ -1,0 +1,1184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>AlUla - Events</title>
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: sans-serif, Arial;
+        }
+
+        body,
+        html {
+            height: 100%;
+            background-color: #1a1a1a;;
+        }
+
+        .hero {
+    position: relative;
+    width: 100%;
+    height: 60vh;
+    background: url('https://s7g10.scene7.com/is/image/rcu/Old-Town-Nights-Desktop-Hero-2880x1620-1?$Responsive$&fit=stretch&fmt=webp&wid=1920') center / cover no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-size: cover;
+    background-position: center;
+        }
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.45);
+             z-index: 1;
+        }
+
+        .hero h3 {
+            position: relative;
+            font-size: 10vw;
+            color: white;
+            font-weight: 900;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            text-align: center;
+            line-height: 0.9;
+        }
+
+/* top nav */
+        nav {
+            position: absolute;
+            top:15px;
+            right: 40px;
+            z-index: 10;
+        }
+
+        nav a {
+            color: white;
+            margin-left: 25px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #d4af37;
+        }
+
+        nav a.profile-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8px;
+            transition: all 0.3s;
+        }
+
+        nav a.profile-icon:hover {
+            transform: scale(1.1);
+        }
+
+        nav a.profile-icon svg {
+            transition: all 0.3s;
+        }
+
+        nav a.profile-icon:hover svg {
+            stroke: #d4af37;
+        }
+
+
+ .breadcrumb {
+      background:#000000;
+      padding:25px 40px;
+      border-bottom:1px solid #d4af37;
+    }
+     .breadcrumb-container {
+      max-width:1200px;
+      margin:0 auto;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-size:16px;
+      color:#666;
+    }
+    .breadcrumb a {
+      color:#d4af37;
+      text-decoration:none;
+      transition:color 0.3s;
+    }
+
+   
+    .breadcrumb a:hover {
+      color:#ffffff;
+      text-decoration:underline;
+    }
+
+    .breadcrumb span {
+      color:#999;
+    }
+
+
+        .places-section {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 80px 40px;
+        }
+
+        .places-section h2 {
+            font-size: 42px;
+            margin-bottom: 25px;
+            color: #ffffff;
+        }
+
+        .places-section .description {
+            max-width: 1000px;
+            color: #d4af37;
+            line-height: 1.8;
+            margin-bottom: 60px;
+        }
+
+        .carousel-wrapper {
+            position: relative;
+            margin-bottom: 80px;
+            padding: 0 50px;
+        }
+
+        .swiper-container {
+            padding: 30px 10px 50px;
+        }
+
+        .swiper-slide {
+            display: flex;
+            justify-content: center;
+            height: auto;
+        }
+
+        .event-card {
+            background-color: #2c2c2c;
+            color: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease;
+        }
+
+        .event-card:hover {
+            transform: translateY(8px);
+        }
+
+        .event-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .event-card-content {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .event-badge {
+            background-color: #d4af37;
+            padding: 5px 12px;
+            border-radius: 5px;
+            font-size: 12px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 12px;
+            width: fit-content;
+        }
+
+        .event-card-content h3 {
+            margin-top: 8px;
+            margin-bottom: 8px;
+            font-size: 20px;
+            line-height: 1.3;
+        }
+
+        .event-date {
+            font-size: 13px;
+            color: #ccc;
+            margin-bottom: 12px;
+        }
+
+        .event-card-content p {
+            font-size: 15px;
+            line-height: 1.6;
+            color: #ddd;
+            margin-bottom: 15px;
+            flex-grow: 1;
+        }
+        .elissa-btn {
+            background: #d4af37;
+            border: none;
+            color: white;
+            padding: 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+            transition: 0.3s;
+            font-size: 15px;
+            font-weight: bold;
+            margin-top: auto;
+        }
+
+        .elissa-btn:hover {
+           background: #b89f2d;
+            transform: translateY(-2px);
+        }
+
+        .book-btn {
+            background: #d4af37;
+            border: none;
+            color: white;
+            padding: 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+            transition: 0.3s;
+            font-size: 15px;
+            font-weight: bold;
+            margin-top: auto;
+        }
+
+        .book-btn:hover {
+            background: #b89f2d;
+            transform: translateY(-2px);
+        }
+        .back-btn {
+    margin: 20px 0;
+    padding: 10px 18px;
+    font-size: 16px;
+    background:#3B2A24;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.back-btn:hover {
+    background: #ddd;
+}
+
+
+        .swiper-button-next,
+        .swiper-button-prev {
+            color: #d4af37;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .swiper-button-next:after,
+        .swiper-button-prev:after {
+            font-size: 22px;
+        }
+
+        .swiper-pagination-bullet {
+            background: #d4af37;
+            opacity: 0.5;
+        }
+
+        .swiper-pagination-bullet-active {
+            opacity: 1;
+            background: #d4af37;
+        }
+
+        @media (max-width: 968px) {
+            .carousel-wrapper {
+                padding: 0 20px;
+            }
+        }
+
+        /* Styles for Booking Page */
+        header {
+            background: #3B2A24;
+            color: white;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            font-size: 28px;
+        }
+
+        header nav a {
+            color: white;
+            margin-left: 20px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .booking-header {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .booking-header h2 {
+            font-size: 32px;
+            color: #222;
+            margin-bottom: 10px;
+        }
+
+        .booking-header p {
+            color: #666;
+            font-size: 16px;
+        }
+
+        .booking-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+        }
+
+        .booking-main {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .booking-summary {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            height: fit-content;
+            position: sticky;
+            top: 20px;
+        }
+
+        .seat-map {
+            margin: 30px 0;
+        }
+
+        .stage {
+            background: #3B2A24;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 40px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .seats-grid {
+            display: grid;
+            grid-template-columns: repeat(10, 1fr);
+            gap: 12px;
+            margin: 20px 0;
+        }
+
+        .seat {
+            aspect-ratio: 1;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+            background: white;
+        }
+
+        .seat:hover {
+            transform: scale(1.1);
+            border-color: #3B2A24;
+        }
+
+        .seat.selected {
+            background: #3B2A24;
+            color: white;
+            border-color: #3B2A24;
+        }
+
+        .seat.booked {
+            background: #ccc;
+            cursor: not-allowed;
+            opacity: 0.5;
+        }
+
+        .seat-legend {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            margin-top: 30px;
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 8px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .legend-box {
+            width: 30px;
+            height: 30px;
+            border-radius: 6px;
+            border: 2px solid #ddd;
+        }
+
+        .legend-box.available {
+            background: white;
+        }
+
+        .legend-box.selected {
+            background: #3B2A24;
+            border-color: #3B2A24;
+        }
+
+        .legend-box.booked {
+            background: #ccc;
+        }
+
+        /* Calendar */
+        .calendar {
+            margin: 20px 0;
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .calendar-header h3 {
+            font-size: 20px;
+            color: #222;
+        }
+
+        .calendar-nav {
+            display: flex;
+            gap: 10px;
+        }
+
+        .calendar-nav button {
+            padding: 8px 15px;
+            background: #3B2A24;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 10px;
+        }
+
+        .calendar-day {
+            aspect-ratio: 1;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: white;
+        }
+
+        .calendar-day:hover {
+            border-color: #3B2A24;
+            transform: scale(1.05);
+        }
+
+        .calendar-day.selected {
+            background: #3B2A24;
+            color: white;
+            border-color: #3B2A24;
+        }
+
+        .calendar-day.disabled {
+            background: #f5f5f5;
+            color: #ccc;
+            cursor: not-allowed;
+        }
+
+        .day-number {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .day-name {
+            font-size: 11px;
+            opacity: 0.7;
+        }
+
+        /* Form */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        /* Summary */
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .summary-total {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid #3B2A24;
+            font-size: 20px;
+            font-weight: bold;
+            color: #3B2A24;
+        }
+
+        .confirm-btn {
+            width: 100%;
+            padding: 15px;
+            background: #3B2A24;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: all 0.3s;
+        }
+
+        .confirm-btn:hover {
+            background: #3B2A24;
+            transform: translateY(-2px);
+        }
+
+        .confirm-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        @media (max-width: 968px) {
+            .carousel-wrapper {
+                padding: 0 20px;
+            }
+
+            .booking-content {
+                grid-template-columns: 1fr;
+            }
+
+            .seats-grid {
+                grid-template-columns: repeat(8, 1fr);
+                gap: 8px;
+            }
+        }
+        
+        
+        .hero h1 {
+    position: relative;
+    font-size: 48px;
+    color: #fff;
+    text-align: center;
+    z-index: 2;
+  }
+  .contact-section {
+    padding: 60px;
+    background-color: #1a1a1a;
+    text-align: center;
+  }
+  .contact-section h2 {
+    color: #ffffff;
+    margin-bottom: 20px;
+  }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+  }
+  .contact-box {
+    background-color: #2c2c2c;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  }
+  .contact-box h3 {
+    color: #d4af37;
+    margin-bottom: 15px;
+  }
+  .contact-box p {
+    color: #ccc;
+    line-height: 1.6;
+  }
+    </style>
+</head>
+
+<body>
+
+    <div class="hero">
+        <nav>
+    <a href="/about">About</a>
+     <a href="/about">About</a>
+        <a href="/booking">Booking</a>
+        <a href="/login">Login</a>
+    <a href="/contact">Contact</a>
+     <a href="/profile" class="profile-icon" title="Profile">
+            <a href="/profile" class="profile-icon" title="Profile">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+        </a>
+  </nav>
+    
+        <h3>ALULA EVENTS</h3>
+    </div>
+  <!-- Breadcrumb -->
+  <div class="breadcrumb">
+    <div class="breadcrumb-container">
+      <a href="/">Home</a>
+      <span>|</span>
+      <a href="/tours">Top Things To Do</a>
+      <span>|</span>
+      <span>Events</span>
+    </div>
+  </div>
+
+    <div class="places-section" id="events">
+        <h2>Upcoming Events</h2>
+        <div class="description">
+            Discover the most exciting events happening in AlUla!
+        </div>
+
+        <div class="carousel-wrapper">
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+
+                    <div class="swiper-slide">
+                        <div class="event-card" data-category="concerts" data-event-id="elissa2025">
+                            <img src="https://s7g10.scene7.com/is/image/rcu/Elissa-Hero-mobile-752x936?$Responsive$" alt="Elissa Concert">
+                            <div class="event-card-content">
+                                <span class="event-badge">Concert</span>
+                                <h3>Elissa Concert</h3>
+                                <p class="event-date">December 2025</p>
+                                <p>Live performance in magical AlUla atmosphere.</p>
+                               <button class="elissa-btn" onclick="window.location.href='/elissaa'">Book Now →</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <div class="event-card" data-category="adventure" data-event-id="polo2026">
+                            <img src="https://s7g10.scene7.com/is/image/rcu/alula-aurora-sg-desert-polo-elephant-rock-hero-2880x1620-1?$Responsive$" alt="Desert Polo">
+                            <div class="event-card-content">
+                                <span class="event-badge">Adventure</span>
+                                <h3>AlUla Desert Polo 2026</h3>
+                                <p class="event-date">16–17 Jan 2026</p>
+                                <p>Prestigious polo experience with a desert backdrop.</p>
+                                <button class="book-btn" onclick="goBook('AlUla Desert Polo 2026', 'adventure', 150)">Book Now →</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <div class="event-card" data-category="art" data-event-id="maraya-tour">
+                            <img src="https://s7g10.scene7.com/is/image/rcu/maraya-tour-hero-2880x1620?$Responsive$" alt="Maraya Tour">
+                            <div class="event-card-content">
+                                <span class="event-badge">Art</span>
+                                <h3>Maraya Tour</h3>
+                                <p class="event-date">Available year-round</p>
+                                <p>Explore the world's largest mirrored building.</p>
+                                <button class="book-btn" onclick="goBook('Maraya Tour', 'art', 80)">Book Now →</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <div class="event-card" data-category="adventure" data-event-id="stars">
+                            <img src="https://s7g10.scene7.com/is/image/rcu/magical-journey-among-the-stars-desktop-2880x1620?$Responsive$" alt="Stars Journey">
+                            <div class="event-card-content">
+                                <span class="event-badge">Adventure</span>
+                                <h3>A Magical Journey Among the Stars</h3>
+                                <p class="event-date">2 hours • Selected nights</p>
+                                <p>Hear magical stories under the stars.</p>
+                                <button class="book-btn" onclick="goBook('A Magical Journey Among the Stars', 'adventure', 120)">Book Now →</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <div class="event-card" data-category="adventure" data-event-id="balloon">
+                            <img src="https://s7g10.scene7.com/is/image/rcu/hot-air-balloon-hero-02?$Responsive$" alt="Hot Air Balloon">
+                            <div class="event-card-content">
+                                <span class="event-badge">Adventure</span>
+                                <h3>Hot Air Balloon Ride</h3>
+                                <p class="event-date">Daily – Sunrise</p>
+                                <p>Breathtaking flight over AlUla mountains.</p>
+                                <button class="book-btn" onclick="goBook('Hot Air Balloon Ride', 'adventure', 200)">Book Now →
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <div class="event-card" data-category="adventure" data-event-id="zipline">
+                            <img src="https://s7g10.scene7.com/is/image/rcu/alula-zipline-hero-final?$Responsive$" alt="Zipline">
+                            <div class="event-card-content">
+                                <span class="event-badge">Adventure</span>
+                                <h3>AlUla Zipline</h3>
+                                <p class="event-date">30 minutes • Daily</p>
+                                <p>Experience an adrenaline rush through the canyon.</p>
+                                <button class="book-btn" onclick="goBook('AlUla Zipline', 'adventure', 90)">Book Now →</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!-- Add Pagination -->
+            <div class="swiper-pagination"></div>
+            <!-- Add Navigation -->
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
+    </div>
+
+    <div class="container" id="booking" style="display: none;">
+        <header>
+    <h1>🎫 Book Your Experience</h1>
+</header>
+
+<button class="back-btn" onclick="backToEvents()">← Back to Events</button>
+
+
+        <div class="booking-header">
+            <h2 id="eventName">Loading...</h2>
+            <p id="eventDetails">Please wait...</p>
+        </div>
+
+        <div class="booking-content">
+
+            <!-- Main Booking Area -->
+            <div class="booking-main">
+
+                
+
+                <!-- Other Events: Calendar -->
+                <div id="calendarSelection" style="display: none;">
+                    <h3>Select Date</h3>
+
+                    <div class="calendar">
+                        <div class="calendar-header">
+                            <h3 id="currentMonth">December 2025</h3>
+                            <div class="calendar-nav">
+                                <button onclick="previousMonth()">‹</button>
+                                <button onclick="nextMonth()">›</button>
+                            </div>
+                        </div>
+
+                        <div class="calendar-grid" id="calendarGrid"></div>
+                    </div>
+
+                    <div class="form-group" style="margin-top: 30px;">
+                        <label>Number of People:</label>
+                        <input type="number" id="numPeople" min="1" max="10" value="1" onchange="updateSummary()">
+                    </div>
+                </div>
+
+                <!-- Contact Info -->
+                <div style="margin-top: 40px;">
+                    <h3>Your Information</h3>
+
+                    <div class="form-group">
+                        <label>Full Name:</label>
+                        <input type="text" id="fullName" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Email:</label>
+                        <input type="email" id="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Phone:</label>
+                        <input type="tel" id="phone" required>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Booking Summary -->
+            <div class="booking-summary">
+                <h3>Booking Summary</h3>
+
+                <div class="summary-item">
+                    <span>Event:</span>
+                    <span id="summaryEvent">-</span>
+                </div>
+
+                <div class="summary-item" id="summarySeats" style="display: none;">
+                    <span>Selected Seats:</span>
+                    <span id="seatsCount">0</span>
+                </div>
+
+                <div class="summary-item" id="summaryDate" style="display: none;">
+                    <span>Date:</span>
+                    <span id="selectedDate">-</span>
+                </div>
+
+                <div class="summary-item" id="summaryPeople" style="display: none;">
+                    <span>Number of People:</span>
+                    <span id="peopleCount">1</span>
+                </div>
+
+                <div class="summary-item">
+                    <span>Price per Person:</span>
+                    <span id="pricePerPerson">SAR 0</span>
+                </div>
+
+                <div class="summary-total">
+                    <span>Total:</span>
+                    <span id="totalPrice">SAR 0</span>
+                </div>
+
+                <button class="confirm-btn" id="confirmBtn" onclick="confirmBooking()" disabled>
+                    Confirm Booking
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script>
+        const swiper = new Swiper('.swiper-container', {
+            loop: true,
+            slidesPerView: 3,
+            spaceBetween: 30,
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            breakpoints: {
+                320: {
+                    slidesPerView: 1,
+                    spaceBetween: 20
+                },
+                768: {
+                    slidesPerView: 2,
+                    spaceBetween: 25
+                },
+                1024: {
+                    slidesPerView: 3,
+                    spaceBetween: 30
+                }
+            }
+        });
+
+        let selectedSeats = [];
+        let selectedDate = null;
+        let eventData = null;
+
+        function goBook(eventName, eventType, eventPrice) {
+    eventData = { name: eventName, type: eventType, price: eventPrice };
+    sessionStorage.setItem('bookingEvent', JSON.stringify(eventData));
+
+    // Hide events section
+    document.querySelector('.places-section').style.display = 'none';
+
+    // Show booking section
+    document.getElementById('booking').style.display = 'block';
+
+    displayEvent();
+}
+
+function backToEvents() {
+    document.getElementById('booking').style.display = 'none';
+    document.querySelector('.places-section').style.display = 'block';
+}
+
+
+
+        function displayEvent() {
+            document.getElementById('eventName').textContent = eventData.name;
+            document.getElementById('eventDetails').textContent = `Category: ${eventData.type} | Starting from SAR ${eventData.price}`;
+            document.getElementById('summaryEvent').textContent = eventData.name;
+            document.getElementById('pricePerPerson').textContent = `SAR ${eventData.price}`;
+
+            if (eventData.type === 'concerts') {
+                // Show seat selection
+                document.getElementById('seatSelection').style.display = 'block';
+                document.getElementById('summarySeats').style.display = 'flex';
+                generateSeats();
+            } else {
+                // Show calendar
+                document.getElementById('calendarSelection').style.display = 'block';
+                document.getElementById('summaryDate').style.display = 'flex';
+                document.getElementById('summaryPeople').style.display = 'flex';
+                generateCalendar();
+            }
+        }
+
+        // Generate calendar
+        function generateCalendar() {
+            const grid = document.getElementById('calendarGrid');
+            const today = new Date();
+            const daysInMonth = 31;
+
+            for (let i = 1; i <= daysInMonth; i++) {
+                const day = document.createElement('div');
+                day.className = 'calendar-day';
+
+                const date = new Date(2025, 11, i); // December 2025
+                const isPast = date < today;
+
+                if (isPast) {
+                    day.classList.add('disabled');
+                } else {
+                    day.onclick = () => selectDate(i, day);
+                }
+
+                day.innerHTML = `
+                    <span class="day-number">${i}</span>
+                    <span class="day-name">${['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][date.getDay()]}</span>
+                `;
+
+                grid.appendChild(day);
+            }
+        }
+
+        function selectDate(dayNum, dayElement) {
+            document.querySelectorAll('.calendar-day').forEach(d => d.classList.remove('selected'));
+            dayElement.classList.add('selected');
+            selectedDate = `December ${dayNum}, 2025`;
+            document.getElementById('selectedDate').textContent = selectedDate;
+            updateSummary();
+        }
+
+        function previousMonth() {
+            alert('Previous month - Coming soon!');
+        }
+
+        function nextMonth() {
+            alert('Next month - Coming soon!');
+        }
+
+        // Update summary
+        function updateSummary() {
+            const price = parseInt(eventData.price);
+            let total = 0;
+            let canConfirm = false;
+
+            if (eventData.type === 'concerts') {
+                const count = selectedSeats.length;
+                document.getElementById('seatsCount').textContent = count + ' seat(s)';
+                total = price * count;
+                canConfirm = count > 0;
+            } else {
+                const numPeople = parseInt(document.getElementById('numPeople').value) || 1;
+                document.getElementById('peopleCount').textContent = numPeople;
+                total = price * numPeople;
+                canConfirm = selectedDate !== null;
+            }
+
+            document.getElementById('totalPrice').textContent = `SAR ${total}`;
+            document.getElementById('confirmBtn').disabled = !canConfirm;
+        }
+
+       // ============================================
+// إضافة هذا الكود في نهاية ملف booking.ejs
+// استبدل دالة confirmBooking القديمة بهذه
+// ============================================
+
+async function confirmBooking() {
+    const fullName = document.getElementById('fullName').value;
+    const email = document.getElementById('email').value;
+    const phone = document.getElementById('phone').value;
+
+    if (!fullName || !email || !phone) {
+        showNotification('Please fill in all your information!', 'error');
+        return;
+    }
+
+    // جمع بيانات الحجز
+    const bookingData = {
+        activityName: eventData.name,
+        bookingDate: selectedDate || 'TBA',
+        numPeople: parseInt(document.getElementById('numPeople')?.value) || selectedSeats.length || 1,
+        fullName,
+        email,
+        phone
+    };
+
+    // إظهار مؤشر التحميل
+    const confirmBtn = document.getElementById('confirmBtn');
+    const originalText = confirmBtn.textContent;
+    confirmBtn.disabled = true;
+    confirmBtn.textContent = 'Saving...';
+
+    try {
+        // إرسال الحجز للسيرفر
+        const response = await fetch('/api/save-booking', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(bookingData)
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+            // نجح الحجز
+            showNotification('✅ Booking Confirmed Successfully!', 'success');
+            
+            // رسالة تأكيد
+            setTimeout(() => {
+                alert(`✅ Booking Confirmed!\n\nEvent: ${bookingData.activityName}\nDate: ${bookingData.bookingDate}\nGuests: ${bookingData.numPeople}\n\nYou can view your bookings in your profile.`);
+                
+                // إعادة التوجيه للبروفايل
+                window.location.href = '/profile';
+            }, 500);
+        } else {
+            showNotification(data.message || 'Booking failed', 'error');
+            confirmBtn.disabled = false;
+            confirmBtn.textContent = originalText;
+        }
+    } catch (err) {
+        console.error('Booking error:', err);
+        showNotification('Connection error. Please try again.', 'error');
+        confirmBtn.disabled = false;
+        confirmBtn.textContent = originalText;
+    }
+}
+
+// ============================================
+// دالة عرض الإشعارات
+// ============================================
+function showNotification(message, type = 'success') {
+    const old = document.querySelector('.toast-notification');
+    if (old) old.remove();
+    
+    const toast = document.createElement('div');
+    toast.className = 'toast-notification';
+    toast.textContent = message;
+    
+    const colors = {
+        success: '#4caf50',
+        error: '#f44336',
+        warning: '#ff9800'
+    };
+    
+    toast.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: ${colors[type] || colors.success};
+        color: white;
+        padding: 15px 25px;
+        border-radius: 8px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+        z-index: 9999;
+        font-weight: bold;
+        font-size: 16px;
+        animation: slideIn 0.3s ease;
+    `;
+    
+    document.body.appendChild(toast);
+    
+    setTimeout(() => {
+        toast.style.animation = 'slideOut 0.3s ease';
+        setTimeout(() => toast.remove(), 300);
+    }, 3000);
+}
+
+// CSS للأنيميشن
+if (!document.getElementById('toast-animations')) {
+    const style = document.createElement('style');
+    style.id = 'toast-animations';
+    style.textContent = `
+        @keyframes slideIn {
+            from { transform: translateX(400px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        @keyframes slideOut {
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(400px); opacity: 0; }
+        }
+    `;
+    document.head.appendChild(style);
+}
+    </script>
+    
+<!-- CONTACT SECTION -->
+<div class="contact-section">
+  <h2>Need an expert? Leave your info and we’ll be in touch shortly</h2>
+  <div class="contact-grid">
+    <div class="contact-box">
+      <h3>VISIT US</h3>
+      <p>Come and visit us at our office and we’ll help you with all your needs.<br><br> Alula, Saudi Arabia</p>
+    </div>
+    <div class="contact-box">
+      <h3>CALL US</h3>
+      <p>Feel free to give us a call, we are here to help you.<br><br>+966 55 555 555</p>
+    </div>
+    <div class="contact-box">
+      <h3>CONTACT US</h3>
+      <p>You can also contact us via email or our contact form.<br><br>alula@sa.com</p>
+    </div>
+  </div>
+</div>
+
+</body>
+
+</html>

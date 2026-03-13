@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sign Up – AlUla</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-image: url("https://www.sellingtravel.co.uk/wp-content/uploads/2023/10/Oasis-Heritage-Trail-lead.jpg");
+      background-size: cover;
+      background-position: center;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+    }
+
+    .overlay {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0, 0, 0, 0.6);
+      z-index: 0;
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      width: 80%;
+      max-width: 1000px;
+      background-color: rgba(26, 26, 26, 0.85);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 25px rgba(0,0,0,0.4);
+    }
+
+    .left-side {
+      flex: 1;
+      padding: 40px;
+      color: #d4af37;
+    }
+
+    .left-side h1 {
+      font-size: 36px;
+      margin-bottom: 20px;
+    }
+
+    .left-side p {
+      font-size: 16px;
+      line-height: 1.6;
+      color: #ccc;
+    }
+
+    .signup-box {
+      flex: 1;
+      background-color: #fff;
+      color: #3B2A24;
+      padding: 40px;
+      text-align: center;
+    }
+
+    .signup-box h2 {
+      margin-bottom: 20px;
+      color: #d4af37;
+    }
+
+    .signup-box input {
+      width: 100%;
+      padding: 12px;
+      margin: 15px 0;
+      border: none;
+      border-bottom: 1px solid #ccc;
+      background-color: transparent;
+      color: #3B2A24;
+      font-size: 14px;
+    }
+
+    .signup-box input::placeholder { color: #999; }
+
+    .signup-box button {
+      margin-top: 20px;
+      background-color: #3B2A24;
+      color: white;
+      border: none;
+      padding: 12px 22px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .signup-box button:hover { background-color: #5a3d30; }
+
+    .signup-box a { color: #d4af37; text-decoration: none; }
+    .signup-box a:hover { text-decoration: underline; }
+
+    .error { color: red; font-size: 14px; }
+
+    .google-btn {
+      margin-top: 15px;
+      background-color: #db4437;
+      color: white;
+      border: none;
+      padding: 12px 22px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+      width: 100%;
+    }
+
+    .google-btn:hover { background-color: #c23321; }
+
+    @media(max-width: 768px) {
+      .container { flex-direction: column; }
+      .left-side, .signup-box { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="left-side">
+      <h1>JOIN THE JOURNEY</h1>
+      <p>Become part of the AlUla experience.<br>
+      Sign up to explore ancient wonders, breathtaking nature, and unforgettable adventures.<br>
+      Your story starts here.</p>
+    </div>
+    <div class="signup-box">
+      <h2>Create an Account</h2>
+      <% if(err_msg){ %>
+        <p class="error"><%= err_msg %></p>
+      <% } %>
+      <form action="/signup" method="POST">
+        <input type="text" name="firstName" placeholder="First Name" value="<%= data.firstName || '' %>" required>
+        <input type="text" name="lastName" placeholder="Last Name" value="<%= data.lastName || '' %>" required>
+        <input type="email" name="email" placeholder="Email" value="<%= data.email || '' %>" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <button type="submit">Sign Up</button>
+      </form>
+      <p>Already have an account? <a href="/login">Login</a></p>
+    </div>
+  </div>
+</body>
+</html>
+
+

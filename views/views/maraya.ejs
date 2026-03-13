@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Maraya - AlUla</title>
+
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; font-family:Arial, sans-serif; }
+
+    body, html { height:100%; }
+
+    /* Hero Section - with Video */
+    .hero {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      background: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .hero iframe {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 100vw;
+      height: 56.25vw;
+      min-height: 100vh;
+      min-width: 177.77vh;
+      transform: translate(-50%, -50%);
+    }
+
+    /* dark overlay */
+    .hero::before {
+      content:"";
+      position:absolute;
+      top:0; left:0;
+      width:100%; height:100%;
+      background:rgba(0,0,0,0.45);
+    }
+
+    /* big title */
+    .hero h3 {
+      position:relative;
+      font-size:18vw;
+      color:white;
+      font-weight:900;
+      letter-spacing:5px;
+      text-transform:uppercase;
+      text-align:center;
+      line-height:0.9;
+      z-index:2;
+    }
+
+            /* top nav */
+        nav {
+            position: absolute;
+            top:15px;
+            right: 40px;
+            z-index: 10;
+        }
+
+        nav a {
+            color: white;
+            margin-left: 25px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #d4af37;
+        }
+
+        nav a.profile-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8px;
+            transition: all 0.3s;
+        }
+
+        nav a.profile-icon:hover {
+            transform: scale(1.1);
+        }
+
+        nav a.profile-icon svg {
+            transition: all 0.3s;
+        }
+
+        nav a.profile-icon:hover svg {
+            stroke: #d4af37;
+        }
+
+    /* Breadcrumb */
+    .breadcrumb {
+      background:#fff;
+      padding:25px 40px;
+      border-bottom:1px solid #e0e0e0;
+    }
+
+    .breadcrumb-container {
+      max-width:1200px;
+      margin:0 auto;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-size:16px;
+      color:#666;
+    }
+
+    .breadcrumb a {
+      color:#2d5016;
+      text-decoration:none;
+      transition:color 0.3s;
+    }
+
+    .breadcrumb a:hover {
+      color:#3d6b20;
+      text-decoration:underline;
+    }
+
+    .breadcrumb span {
+      color:#999;
+    }
+
+    /* Content Section Below Hero */
+    .content-section {
+      background:#fff;
+      padding:80px 40px;
+    }
+
+    .content-container {
+      max-width:1200px;
+      margin:0 auto;
+    }
+
+    .content-block {
+      margin-bottom:60px;
+    }
+
+    .content-block h2 {
+      font-size:48px;
+      color:#222;
+      margin-bottom:15px;
+      font-weight:bold;
+    }
+
+    .content-block h3 {
+      font-size:32px;
+      color:#555;
+      margin-bottom:25px;
+      font-weight:600;
+    }
+
+    .content-block p {
+      font-size:18px;
+      line-height:1.9;
+      color:#666;
+      margin-bottom:30px;
+    }
+
+    /* Image and Text Side by Side */
+    .content-grid {
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:50px;
+      align-items:center;
+      margin-top:60px;
+    }
+
+    .content-grid img {
+      width:100%;
+      border-radius:8px;
+      box-shadow:0 4px 20px rgba(0,0,0,0.15);
+      order:1;
+    }
+
+    .content-grid .text-content {
+      order:2;
+    }
+
+    .content-grid .text-content h3 {
+      font-size:32px;
+      color:#222;
+      margin-bottom:20px;
+      font-weight:bold;
+    }
+
+    .content-grid .text-content p {
+      font-size:18px;
+      line-height:1.9;
+      color:#666;
+    }
+
+    /* Location Section */
+    .location-section {
+      background:#f9f9f9;
+      padding:80px 40px;
+    }
+
+    .location-container {
+      max-width:1200px;
+      margin:0 auto;
+    }
+
+    .location-section h2 {
+      font-size:42px;
+      color:#222;
+      margin-bottom:40px;
+      font-weight:bold;
+    }
+
+    .map-container {
+      position:relative;
+      width:100%;
+      height:500px;
+      border-radius:12px;
+      overflow:hidden;
+      box-shadow:0 4px 20px rgba(0,0,0,0.15);
+    }
+
+    .map-container iframe {
+      width:100%;
+      height:100%;
+      border:0;
+    }
+
+    .map-overlay {
+      position:absolute;
+      bottom:40px;
+      left:50%;
+      transform:translateX(-50%);
+      z-index:10;
+    }
+
+    .map-btn {
+      padding:15px 40px;
+      background:#2d5016;
+      color:white;
+      border:none;
+      border-radius:30px;
+      font-size:16px;
+      font-weight:bold;
+      cursor:pointer;
+      box-shadow:0 4px 15px rgba(45,80,22,0.3);
+      transition:all 0.3s ease;
+    }
+
+    .map-btn:hover {
+      background:#3d6b20;
+      transform:translateY(-2px);
+      box-shadow:0 6px 20px rgba(45,80,22,0.4);
+    }
+
+    /* Contact Section */
+    .contact-section {
+      padding:80px 60px;
+      background-color:#1a1a1a;
+      text-align:center;
+    }
+
+    .contact-section h2 {
+      color:#ffffff;
+      font-size:32px;
+      margin-bottom:20px;
+    }
+
+    .contact-grid {
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
+      gap:30px;
+      margin-top:40px;
+      max-width:1200px;
+      margin-left:auto;
+      margin-right:auto;
+    }
+
+    .contact-box {
+      background-color:#2c2c2c;
+      padding:40px 30px;
+      border-radius:10px;
+      box-shadow:0 4px 20px rgba(0,0,0,0.3);
+      transition:transform 0.3s ease;
+    }
+
+    .contact-box:hover {
+      transform:translateY(-5px);
+    }
+
+    .contact-box h3 {
+      color:#d4af37;
+      margin-bottom:15px;
+      font-size:22px;
+    }
+
+    .contact-box p {
+      color:#ccc;
+      line-height:1.8;
+      font-size:16px;
+    }
+
+    @media (max-width: 768px) {
+      .hero h3 {
+        font-size:20vw;
+      }
+
+      .content-section {
+        padding:50px 20px;
+      }
+
+      .content-block h2 {
+        font-size:36px;
+      }
+
+      .content-block h3 {
+        font-size:24px;
+      }
+
+      .content-grid {
+        grid-template-columns:1fr;
+        gap:30px;
+      }
+
+      .map-container {
+        height:400px;
+      }
+
+      .contact-section {
+        padding:60px 20px;
+      }
+    }
+  </style>
+
+</head>
+<body>
+
+  <!-- Hero Section -->
+  <div class="hero">
+    <iframe
+       src="https://www.youtube.com/embed/EIOIgAvsZAI?autoplay=1&mute=1&loop=1&playlist=EIOIgAvsZAI"
+      frameborder="0"
+      allow="autoplay; encrypted-media"
+      allowfullscreen>
+    </iframe>
+
+     <!-- Navigation -->
+    <nav>
+        <a href="/">Home</a>
+        <a href="/about">About</a>
+        <a href="/booking">Booking</a>
+        <a href="/login">Login</a>
+        <a href="/contact">Contact</a>
+        <a href="/profile" class="profile-icon" title="Profile">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+        </a>
+    </nav>
+
+
+    <h3>MARAYA</h3>
+  </div>
+
+  <!-- Breadcrumb -->
+  <div class="breadcrumb">
+    <div class="breadcrumb-container">
+      <a href="/">Home</a>
+      <span>|</span>
+      <a href="/tours">Places to go</a>
+      <span>|</span>
+      <span>Maraya</span>
+    </div>
+  </div>
+
+  <!-- Content Section -->
+  <section class="content-section">
+    <div class="content-container">
+      
+      <!-- First Content Block -->
+      <div class="content-block">
+        <h2>Maraya</h2>
+        <h3>Architectural illusion</h3>
+        <p>
+          Maraya is an architectural wonder that has quickly reached icon status. Upon approaching this magnificent mirrored structure in AlUla's Ashar Valley you may feel your eyes are deceiving you as Maraya seems to disappear into the surrounding sandstone cliffs before swiftly reappearing. A multi-purpose venue for concerts, events and conferences, Maraya — meaning 'mirror' in Arabic — is the largest mirrored building in the world and is a piece of art in itself.
+        </p>
+      </div>
+
+      <!-- Image and Text Grid (Image Left, Text Right) -->
+      <div class="content-grid">
+        <!-- Image on Left -->
+        <div>
+          <img src="https://s7g10.scene7.com/is/image/rcu/maraya-place-to-go-stack-02?$Responsive$&fit=stretch&fmt=webp&wid=1920" alt="Maraya Building">
+        </div>
+        
+        <!-- Text on Right -->
+        <div class="text-content">
+          <h3>9,740 reflective glass panels</h3>
+          <p>
+            The shell of the venue lends Maraya a futuristic aesthetic while simultaneously giving it a timeless simplicity and purity. As sunlight skips around its exterior, Maraya harmoniously and respectfully blends into the natural beauty of the desert canyon in which it stands. Further connection to the landscape is accomplished by a 26-metre floor-to-ceiling facade within the venue that can be opened to reveal panoramic views of Ashar Valley.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Location Section -->
+  <section class="location-section">
+    <div class="location-container">
+      <h2>Location</h2>
+      
+      <div class="map-container">
+        <iframe 
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d28394.561234567!2d37.9511111!3d26.7833333!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x15a6d3c5e4a3b8a9%3A0x5b6c7d8e9f0a1b2c!2sMaraya%2C%20AlUla%2C%20Saudi%20Arabia!5e0!3m2!1sen!2s!4v1234567890123!5m2!1sen!2s"
+          allowfullscreen=""
+          loading="lazy">
+        </iframe>
+        
+        <div class="map-overlay">
+          <button class="map-btn" onclick="openMap()">View Map</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="contact-section">
+    <h2>Need an expert? Leave your info and we'll be in touch shortly</h2>
+    <div class="contact-grid">
+      <div class="contact-box">
+        <h3>VISIT US</h3>
+        <p>Come and visit us at our office and we'll help you with all your needs.<br><br>Alula, Saudi Arabia</p>
+      </div>
+      <div class="contact-box">
+        <h3>CALL US</h3>
+        <p>Feel free to give us a call, we are here to help you.<br><br>+966 55 555 555</p>
+      </div>
+      <div class="contact-box">
+        <h3>CONTACT US</h3>
+        <p>You can also contact us via email or our contact form.<br><br>alula@sa.com</p>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Open map in new window
+    function openMap() {
+      window.open('https://www.google.com/maps/place/Maraya,+AlUla,+Saudi+Arabia/@26.7833333,37.9511111,13z', '_blank');
+    }
+  </script>
+
+</body>
+</html>

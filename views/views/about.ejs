@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AlUla - About</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+        body { background-color: #1a1a1a; color: #fff; }
+        
+        /* top nav */
+        nav {
+            position: absolute;
+            top:15px;
+            right: 40px;
+            z-index: 10;
+        }
+
+        nav a {
+            color: white;
+            margin-left: 25px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #d4af37;
+        }
+
+        nav a.profile-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8px;
+            transition: all 0.3s;
+        }
+
+        nav a.profile-icon:hover {
+            transform: scale(1.1);
+        }
+
+        nav a.profile-icon svg {
+            transition: all 0.3s;
+        }
+
+        nav a.profile-icon:hover svg {
+            stroke: #d4af37;
+        }
+
+        /* Main Container */
+        .container { display: flex; height: 100vh; margin-top: 60px; }
+        .left-side { flex: 1; padding: 60px 50px; display: flex; flex-direction: column; justify-content: center; background: linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 100%); position: relative; }
+        h1 { font-size: 72px; margin-bottom: 20px; letter-spacing: 2px; }
+        .description { font-size: 14px; color: #ccc; line-height: 1.6; max-width: 500px; margin-bottom: 40px; }
+        .btn { display: inline-block; padding: 12px 30px; border: 2px solid #d4af37; color: #d4af37; text-decoration: none; transition: all 0.3s; }
+        .btn:hover { background: #d4af37; color: #000; }
+
+        .right-side { flex: 1; background-image: url('https://cdn.mos.cms.futurecdn.net/cT8SQ9RgFNBGVPQ26nFAb-1540-80.jpg.webp'); background-size: cover; background-position: center; position: relative; }
+        .right-side::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.2) 100%); }
+
+        .popular { position: absolute; bottom: 50px; right: 30px; z-index: 20; }
+        .popular-title { font-size: 12px; color: #d4af37; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px; }
+        .popular-images { display: grid; grid-template-columns: repeat(3, 150px); gap: 10px; }
+        .popular-images img { width: 150px; height: 150px; object-fit: cover; border-radius: 5px; cursor: pointer; transition: transform 0.3s; }
+        .popular-images img:hover { transform: scale(1.1); }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <a href="/">Home</a>
+        <a href="/about">About</a>
+        <a href="/booking">Booking</a>
+        <a href="/login">Login</a>
+        <a href="/contact">Contact</a>
+        <a href="/profile" class="profile-icon" title="Profile">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+        </a>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Left Side -->
+        <div class="left-side">
+            <h1>ALULA</h1>
+            <p class="description">
+                AlUla is one of the oldest cities in the Arabian Peninsula, home to the Hegra UNESCO World Heritage Site. 
+                It combines rich history, stunning natural landscapes, and vibrant culture for an unforgettable experience.
+            </p>
+            <a href="/tours" class="btn">Explore →</a>
+        </div>
+
+        <!-- Right Side -->
+        <div class="right-side">
+            <div class="popular">
+                <div class="popular-title">Popular</div>
+                <div class="popular-images">
+                    <img src="https://th.bing.com/th/id/OIP.B8ZPwwZWWbyjckkIpsLaXAHaE8?w=233&h=180&c=7&r=0&o=7&cb=ucfimg2&dpr=1.5&pid=1.7&rm=3&ucfimg=1" alt="Place 1">
+                    <img src="https://www.experiencealula.com/content/dam/rcudxp/global/places-to-go/maraya/experience-card/maraya-place-to-go-card-01.jpg" alt="Place 2">
+                    <img src="https://th.bing.com/th/id/OIP.G4y9PuC8RLX8QV-Kgh45uAHaFi?w=207&h=180&c=7&r=0&o=7&cb=ucfimg2&dpr=1.5&pid=1.7&rm=3&ucfimg=1" alt="Place 3">
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AlUla - Home</title>
+
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; font-family:Arial, sans-serif; }
+
+    body, html { height:100%; }
+
+    .hero {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      background: url('https://blog.umrahme.com/wp-content/uploads/2023/09/attraction_internal1-2.jpg')
+       center center / cover no-repeat;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* dark overlay */
+    .hero::before {
+      content:"";
+      position:absolute;
+      top:0; left:0;
+      width:100%; height:100%;
+      background:rgba(0,0,0,0.45);
+    }
+
+    /* big title */
+    .hero h3 {
+      position:relative;
+      font-size:18vw;
+      color:white;
+      font-weight:900;
+      letter-spacing:5px;
+      text-transform:uppercase;
+      text-align:center;
+      line-height:0.9;
+    }
+        /* top nav */
+        nav {
+            position: absolute;
+            top:15px;
+            right: 40px;
+            z-index: 10;
+        }
+
+        nav a {
+            color: white;
+            margin-left: 25px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #d4af37;
+        }
+
+        nav a.profile-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8px;
+            transition: all 0.3s;
+        }
+
+        nav a.profile-icon:hover {
+            transform: scale(1.1);
+        }
+
+        nav a.profile-icon svg {
+            transition: all 0.3s;
+        }
+
+        nav a.profile-icon:hover svg {
+            stroke: #d4af37;
+        }
+
+    /* button */
+    .hero .btn {
+      position:absolute;
+      bottom:120px;
+      left:50%;
+      transform:translateX(-50%);
+      padding:12px 35px;
+      border:2px solid white;
+      color:white;
+      background:transparent;
+      border-radius:30px;
+      font-size:18px;
+      cursor:pointer;
+      transition:0.3s;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .hero .btn:hover {
+      background:white;
+      color:#000;
+    }
+
+    /* Cookie Banner */
+    .cookie-banner {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #fff;
+      box-shadow: 0 -4px 20px rgba(0,0,0,0.15);
+      padding: 30px 40px;
+      display: none;
+      z-index: 1000;
+      animation: slideUp 0.4s ease-out;
+    }
+
+    .cookie-banner.show {
+      display: block;
+    }
+
+    @keyframes slideUp {
+      from {
+        transform: translateY(100%);
+      }
+      to {
+        transform: translateY(0);
+      }
+    }
+
+    .cookie-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    .cookie-icon {
+      font-size: 40px;
+      flex-shrink: 0;
+    }
+
+    .cookie-text {
+      flex: 1;
+      min-width: 300px;
+    }
+
+    .cookie-text h4 {
+      color: #1a1a1a;
+      font-size: 20px;
+      margin-bottom: 8px;
+      font-weight: 700;
+    }
+
+    .cookie-text p {
+      color: #666;
+      font-size: 14px;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    .cookie-text a {
+      color: #d4af37;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .cookie-text a:hover {
+      text-decoration: underline;
+    }
+
+    .cookie-buttons {
+      display: flex;
+      gap: 15px;
+      flex-shrink: 0;
+    }
+
+    .cookie-btn {
+      padding: 12px 30px;
+      border: none;
+      border-radius: 6px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      white-space: nowrap;
+    }
+
+    .cookie-btn.accept {
+      background: #d4af37;
+      color: white;
+    }
+
+    .cookie-btn.accept:hover {
+      background: #c29d2f;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+    }
+
+    .cookie-btn.decline {
+      background: transparent;
+      color: #666;
+      border: 2px solid #ddd;
+    }
+
+    .cookie-btn.decline:hover {
+      background: #f5f5f5;
+      border-color: #ccc;
+    }
+
+    .cookie-btn.settings {
+      background: transparent;
+      color: #666;
+      border: 2px solid #ddd;
+    }
+
+    .cookie-btn.settings:hover {
+      background: #f5f5f5;
+      border-color: #ccc;
+    }
+
+    @media (max-width: 768px) {
+      .cookie-banner {
+        padding: 20px;
+      }
+
+      .cookie-content {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .cookie-buttons {
+        flex-direction: column;
+        width: 100%;
+      }
+
+      .cookie-btn {
+        width: 100%;
+      }
+    }/* CONTACT SECTION */
+.contact-section {
+  padding: 60px;
+  background-color: #1a1a1a;
+  text-align: center;
+}
+
+.contact-section h2 {
+  color: #ffffff;
+  margin-bottom: 20px;
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  margin-top: 40px;
+}
+
+.contact-box {
+  background-color: #2c2c2c;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+
+.contact-box h3 {
+  color: #d4af37;
+  margin-bottom: 15px;
+}
+
+.contact-box p {
+  color: #ccc;
+  line-height: 1.6;
+}
+
+  </style>
+
+</head>
+<body>
+
+<div class="hero">
+
+   <!-- Navigation -->
+    <nav>
+        <a href="/">Home</a>
+        <a href="/about">About</a>
+        <a href="/booking">Booking</a>
+        <a href="/contact">Contact</a>
+         <a href="/logout">Lougout</a>
+        <a href="/profile" class="profile-icon" title="Profile">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+        </a>
+    </nav>
+
+
+  <h3>ALULA</h3>
+
+  <a href="/tours" class="btn">WATCH TOUR</a>
+
+</div>
+
+<!-- Cookie Banner -->
+<div class="cookie-banner" id="cookieBanner">
+  <div class="cookie-content">
+    <div class="cookie-icon">🍪</div>
+    <div class="cookie-text">
+      <h4>We value your privacy</h4>
+      <p>We use cookies to enhance your browsing experience, serve personalized content, and analyze our traffic. By clicking "Accept All", you consent to our use of cookies. 
+        <a href="/privacy-policy">Read More</a></p>
+    </div>
+    <div class="cookie-buttons">
+      <button class="cookie-btn settings" onclick="handleSettings()">Settings</button>
+      <button class="cookie-btn decline" onclick="handleDecline()">Decline</button>
+      <button class="cookie-btn accept" onclick="handleAccept()">Accept All</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // التحقق من الكوكيز عند تحميل الصفحة
+  window.addEventListener('load', function() {
+    const cookieConsent = localStorage.getItem('cookieConsent');
+    if (!cookieConsent) {
+      setTimeout(() => {
+        document.getElementById('cookieBanner').classList.add('show');
+      }, 1000);
+    }
+  });
+
+  function handleAccept() {
+    localStorage.setItem('cookieConsent', 'accepted');
+    hideBanner();
+  }
+
+  function handleDecline() {
+    localStorage.setItem('cookieConsent', 'declined');
+    hideBanner();
+  }
+
+  function handleSettings() {
+    alert('Cookie settings page would open here');
+    // يمكنك إضافة صفحة إعدادات الكوكيز هنا
+  }
+
+  function hideBanner() {
+    const banner = document.getElementById('cookieBanner');
+    banner.style.animation = 'slideDown 0.4s ease-out';
+    setTimeout(() => {
+      banner.classList.remove('show');
+    }, 400);
+  }
+</script>
+
+<style>
+  @keyframes slideDown {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(100%);
+    }
+  }
+</style>
+<!-- CONTACT SECTION -->
+<div class="contact-section">
+  <h2>Need an expert? Leave your info and we’ll be in touch shortly</h2>
+  <div class="contact-grid">
+    <div class="contact-box">
+      <h3>VISIT US</h3>
+      <p>Come and visit us at our office and we’ll help you with all your needs.<br><br> Alula, Saudi Arabia</p>
+    </div>
+    <div class="contact-box">
+      <h3>CALL US</h3>
+      <p>Feel free to give us a call, we are here to help you.<br><br>+966 55 555 555</p>
+    </div>
+    <div class="contact-box">
+      <h3>CONTACT US</h3>
+      <p>You can also contact us via email or our contact form.<br><br>alula@sa.com</p>
+    </div>
+  </div>
+</div>
+</body>
+</html>
+

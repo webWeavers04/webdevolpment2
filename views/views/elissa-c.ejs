@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elissa Concert Booking - AlUla</title>
+     <style>
+    * { margin:0; padding:0; box-sizing:border-box; font-family:Arial, sans-serif; }
+        body {
+            background-color: #1a1a1a;
+            color: #fff;
+        }
+
+        /* Navigation Bar */
+        /* top nav */
+        nav {
+            position: absolute;
+            top:15px;
+            right: 40px;
+            z-index: 10;
+        }
+
+        nav a {
+            color: white;
+            margin-left: 25px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #d4af37;
+        }
+
+        nav a.profile-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8px;
+            transition: all 0.3s;
+        }
+
+        nav a.profile-icon:hover {
+            transform: scale(1.1);
+        }
+
+        nav a.profile-icon svg {
+            transition: all 0.3s;
+        }
+
+        nav a.profile-icon:hover svg {
+            stroke: #d4af37;
+        }
+        .hero {
+          position: relative;
+        }
+
+        .hero h1 {
+          position: absolute;
+          top: 30px;
+          left: 40px;
+          font-size: 24px;
+          color: white;
+          font-weight: 900;
+          letter-spacing: 3px;
+          z-index: 1000;
+        }
+
+        /* Hero Section */
+        .hero-section {
+          position: relative;
+          width: 100%;
+          height: 600px;
+          background: url('https://s7g10.scene7.com/is/image/rcu/Elissa-Hero-Desktop-2880x1620?$Responsive$&fit=stretch&fmt=webp&wid=1920') center / cover no-repeat;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+        
+        .hero-section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(26,26,26,0.8) 100%);
+        }
+        
+
+        /* Event Details Section */
+        .event-details {
+            max-width: 1200px;
+            margin: -50px auto 0;
+            padding: 0 20px;
+            position: relative;
+            z-index: 20;
+        }
+
+        .event-card-header {
+            background: linear-gradient(135deg, rgba(44, 44, 44, 0.95) 0%, rgba(35, 35, 35, 0.95) 100%);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 50px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .event-card-header h2 {
+            font-size: 36px;
+            color: #d4af37;
+            margin-bottom: 20px;
+        }
+
+        .event-description {
+            color: #ffffff;
+            line-height: 1.8;
+            margin-bottom: 30px;
+            font-size: 16px;
+        }
+
+        /* Event Info Icons */
+        .event-info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: linear-gradient(135deg, rgba(26, 26, 26, 0.8) 0%, rgba(20, 20, 20, 0.9) 100%);
+            padding: 20px;
+            border-radius: 15px;
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            transition: all 0.3s ease;
+        }
+        
+        .info-item:hover {
+            transform: translateY(-5px);
+            border-color: rgba(212, 175, 55, 0.4);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.1);
+        }
+
+        .info-icon {
+            font-size: 24px;
+            color: #d4af37;
+        }
+
+        .info-content h4 {
+            font-size: 14px;
+            color: #999;
+            margin-bottom: 5px;
+        }
+
+        .info-content p {
+            font-size: 16px;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        /* Seats Section */
+        .seats-section {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+
+        .seats-container {
+            background: linear-gradient(135deg, rgba(44, 44, 44, 0.95) 0%, rgba(35, 35, 35, 0.95) 100%);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 50px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .seats-container h3 {
+            color: #d4af37;
+            font-size: 28px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .stage {
+            background: linear-gradient(135deg, #3B2A24, #5a4437);
+            color: white;
+            text-align: center;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 40px;
+            font-size: 20px;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+        }
+
+        .seats-grid {
+            display: grid;
+            grid-template-columns: repeat(10, 1fr);
+            gap: 15px;
+            margin: 30px 0;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .seat {
+            aspect-ratio: 1;
+            border: 3px solid #444;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: bold;
+            background: #1a1a1a;
+            color: #fff;
+        }
+
+        .seat:hover:not(.booked) {
+            transform: scale(1.15);
+            border-color: #d4af37;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
+        }
+
+        .seat.selected {
+            background: #d4af37;
+            color: #000;
+            border-color: #d4af37;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.8);
+        }
+
+        .seat.booked {
+            background: #666;
+            cursor: not-allowed;
+            opacity: 0.4;
+            border-color: #555;
+        }
+
+        /* Legend */
+        .seat-legend {
+            display: flex;
+            gap: 40px;
+            justify-content: center;
+            margin-top: 40px;
+            padding: 30px;
+            background: linear-gradient(135deg, rgba(26, 26, 26, 0.8) 0%, rgba(20, 20, 20, 0.9) 100%);
+            border-radius: 15px;
+            border: 1px solid rgba(212, 175, 55, 0.15);
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .legend-box {
+            width: 35px;
+            height: 35px;
+            border-radius: 8px;
+            border: 3px solid #444;
+        }
+
+        .legend-box.available {
+            background: #1a1a1a;
+        }
+
+        .legend-box.selected {
+            background: #d4af37;
+            border-color: #d4af37;
+        }
+
+        .legend-box.booked {
+            background: #666;
+            opacity: 0.4;
+        }
+
+        /* Booking Summary */
+        .booking-summary {
+            background: linear-gradient(135deg, rgba(44, 44, 44, 0.95) 0%, rgba(35, 35, 35, 0.95) 100%);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .booking-summary h3 {
+            color: #d4af37;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 0;
+            border-bottom: 1px solid #444;
+            color: #ccc;
+        }
+
+        .summary-row:last-child {
+            border-bottom: none;
+        }
+
+        .summary-total {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px 0;
+            margin-top: 20px;
+            border-top: 2px solid #d4af37;
+            font-size: 24px;
+            font-weight: bold;
+            color: #d4af37;
+        }
+
+        /* Payment Form */
+        .payment-section {
+            background: linear-gradient(135deg, rgba(44, 44, 44, 0.95) 0%, rgba(35, 35, 35, 0.95) 100%);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 50px;
+            display: none;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .payment-section.active {
+            display: block;
+        }
+
+        .payment-section h3 {
+            color: #d4af37;
+            font-size: 28px;
+            margin-bottom: 30px;
+        }
+
+        /* Timer Section */
+        .session-timer {
+            background: linear-gradient(135deg, rgba(26, 26, 26, 0.8) 0%, rgba(20, 20, 20, 0.9) 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.2);
+            border: 2px solid rgba(212, 175, 55, 0.2);
+            display: none;
+        }
+
+        .session-timer.active {
+            display: block;
+            animation: pulse 2s infinite;
+        }
+
+       
+        .session-timer h4 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .timer-display {
+            font-size: 36px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .timer-warning {
+            font-size: 14px;
+            margin-top: 10px;
+            opacity: 0.9;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #d4af37;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid rgba(212, 175, 55, 0.2);
+            border-radius: 10px;
+            font-size: 16px;
+            background: rgba(26, 26, 26, 0.8);
+            color: #fff;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #d4af37;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .card-icons {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .card-icon {
+            font-size: 30px;
+        }
+
+        /* Buttons */
+        .btn {
+            width: 100%;
+            padding: 18px;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: #d4af37;
+            color: #000;
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            background: #b89f2d;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.4);
+        }
+
+        .btn-primary:disabled {
+            background: #666;
+            cursor: not-allowed;
+            opacity: 0.5;
+        }
+
+        .btn-back {
+            background: linear-gradient(135deg, #3B2A24 0%, #5a4437 100%);
+            color: #fff;
+            margin-bottom: 20px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .btn-back:hover {
+            background: linear-gradient(135deg, #5a4437 0%, #3B2A24 100%);
+            border-color: rgba(212, 175, 55, 0.4);
+            box-shadow: 0 5px 20px rgba(90, 68, 55, 0.3);
+        }
+
+        /* Success Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: #2c2c2c;
+            padding: 50px;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 500px;
+        }
+
+        .modal-content h2 {
+            color: #d4af37;
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+        .modal-content p {
+            color: #ccc;
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+
+        .success-icon {
+            font-size: 80px;
+            color: #4CAF50;
+            margin-bottom: 20px;
+        }
+
+        /* قسم الاتصال */
+        .contact-section {
+          padding: 80px 60px;
+          background: linear-gradient(180deg, #1a1a1a 0%, #0d0d0d 100%);
+          color: #fff;
+        }
+        .contact-section h2 {
+          text-align: center;
+          margin-bottom: 60px;
+          font-size: 28px;
+          font-weight: 300;
+          letter-spacing: 1px;
+          max-width: 800px;
+          margin-left: auto;
+          margin-right: auto;
+        }
+        .contact-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+          gap: 40px;
+          margin-top: 60px;
+          max-width: 1200px;
+          margin-left: auto;
+          margin-right: auto;
+        }
+        .contact-box {
+          background: rgba(44, 44, 44, 0.6);
+          backdrop-filter: blur(10px);
+          padding: 50px 35px;
+          border-radius: 15px;
+          border: 1px solid rgba(212, 175, 55, 0.2);
+          transition: all 0.4s ease;
+          text-align: center;
+        }
+        .contact-box:hover {
+          transform: translateY(-10px);
+          border-color: rgba(212, 175, 55, 0.5);
+          box-shadow: 0 15px 40px rgba(212, 175, 55, 0.15);
+        }
+        .contact-box h3 {
+          color: #d4af37;
+          margin-bottom: 25px;
+          font-size: 22px;
+          font-weight: 600;
+          letter-spacing: 2px;
+        }
+        .contact-box p {
+          color: #b8b8b8;
+          line-height: 1.8;
+          font-size: 15px;
+          font-weight: 300;
+        }
+
+        @media (max-width: 768px) {
+            .seats-grid {
+                grid-template-columns: repeat(8, 1fr);
+                gap: 10px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .event-info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <a href="/">Home</a>
+        <a href="/about">About</a>
+        <a href="/booking">Booking</a>
+        <a href="/login">Login</a>
+        <a href="/contact">Contact</a>
+        <a href="/profile" class="profile-icon" title="Profile">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+        </a>
+    </nav>
+
+    <!-- Hero Image -->
+    <div class="hero-section"></div>
+
+    <!-- Event Details -->
+    <div class="event-details">
+        <div class="event-card-header">
+            <h2> Elissa Concert - AlUla</h2>
+            <p class="event-description">
+                Get ready for an exceptional evening with the queen of feelings, Elissa, in the heart of historic AlUla city. 
+                An unforgettable musical experience combining authentic art and enchanting nature. 
+                Book your seat now and be part of this special event under the starry sky of AlUla.
+            </p>
+            <button class="btn btn-back" onclick="window.location.href='/booking'">← Back to Events</button>
+        </div>
+        <!-- Event Info Icons -->
+        <div class="event-info-grid">
+            <div class="info-item">
+                <div class="info-icon">📅</div>
+                <div class="info-content">
+                    <h4>Date</h4>
+                    <p>January 9, 2026</p>
+                </div>
+            </div>
+            <div class="info-item">
+                <div class="info-icon">🕐</div>
+                <div class="info-content">
+                    <h4>Arrival Time</h4>
+                    <p>8:00 PM</p>
+                </div>
+            </div>
+            <div class="info-item">
+                <div class="info-icon">🎤</div>
+                <div class="info-content">
+                    <h4>Event Type</h4>
+                    <p>Concert</p>
+                </div>
+            </div>
+            <div class="info-item">
+                <div class="info-icon">📍</div>
+                <div class="info-content">
+                    <h4>Location</h4>
+                    <p>Maraya - AlUla</p>
+                </div>
+            </div>
+            <div class="info-item">
+                <div class="info-icon">👤</div>
+                <div class="info-content">
+                    <h4>Age Requirement</h4>
+                    <p>12 years and above</p>
+                </div>
+            </div>
+            <div class="info-item">
+                <div class="info-icon">👔</div>
+                <div class="info-content">
+                    <h4>Dress Code</h4>
+                    <p>Formal Attire</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Seats Selection -->
+    <div class="seats-section">
+       
+
+        <div class="seats-container">
+            <h3>Choose Your Seats</h3>
+            
+            <div class="stage">🎤 Stage</div>
+
+            <div class="seats-grid" id="seatsGrid"></div>
+
+            <div class="seat-legend">
+                <div class="legend-item">
+                    <div class="legend-box available"></div>
+                    <span>Available</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-box selected"></div>
+                    <span>Selected</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-box booked"></div>
+                    <span>Booked</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Booking Summary -->
+        <div class="booking-summary">
+            <h3>Booking Summary</h3>
+            <div class="summary-row">
+                <span>Event:</span>
+                <span>Elissa Concert</span>
+            </div>
+            <div class="summary-row">
+                <span>Selected Seats:</span>
+                <span id="selectedSeatsText">No seats selected</span>
+            </div>
+            <div class="summary-row">
+                <span>Number of Seats:</span>
+                <span id="seatCount">0</span>
+            </div>
+            <div class="summary-row">
+                <span>Seat Price:</span>
+                <span>350 SAR</span>
+            </div>
+            <div class="summary-total">
+                <span>Total:</span>
+                <span id="totalPrice">0 SAR</span>
+            </div>
+            <button class="btn btn-primary" id="proceedBtn" onclick="showPayment()" disabled>
+                Proceed to Payment
+            </button>
+        </div>
+
+        <!-- Payment Section -->
+        <div class="payment-section" id="paymentSection">
+            <!-- Session Timer -->
+            <div class="session-timer" id="sessionTimer">
+                <h4>The remaning time to complete the reservation </h4>
+                <div class="timer-display" id="timerDisplay">02:00</div>
+                <p class="timer-warning">The reservation will be automatically canceled after the time expires. </p>
+            </div>
+
+            <h3>Payment Information</h3>
+            
+            <form id="paymentForm" onsubmit="processPayment(event)">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="fullName" required placeholder="Enter your full name">
+                </div>
+
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="email" required placeholder="example@email.com">
+                </div>
+
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input type="tel" id="phone" required placeholder="+966 5X XXX XXXX" pattern="[+0-9\s]+">
+                </div>
+
+                <div class="form-group">
+                    <label>Card Number</label>
+                    <input type="text" id="cardNumber" required placeholder="1234 5678 9012 3456" 
+                           maxlength="19" pattern="[0-9\s]+" oninput="formatCardNumber(this)">
+                    <div class="card-icons">
+                        <span class="card-icon">💳</span>
+                        <span class="card-icon">🏦</span>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Expiry Date</label>
+                        <input type="text" id="expiryDate" required placeholder="MM/YY" 
+                               maxlength="5" pattern="[0-9/]+" oninput="formatExpiry(this)">
+                    </div>
+                    <div class="form-group">
+                        <label>CVV</label>
+                        <input type="text" id="cvv" required placeholder="123" 
+                               maxlength="3" pattern="[0-9]+">
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Confirm Payment</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div class="modal" id="successModal">
+        <div class="modal-content">
+           <div class="success-icon">✅</div>
+            <h2>Booking Successful!</h2>
+            <p>
+                Thank you for booking your ticket for Elissa's concert in AlUla.<br>
+                Booking details have been sent to your email.<br>
+                Booking Number: <strong id="bookingNumber"></strong>
+            </p>
+            <button class="btn btn-primary" onclick="closeModal()">Okay</button>
+        </div>
+    </div>
+
+    <script>
+        // Retrieve booked seats from server
+        let bookedSeats = [];
+        let selectedSeats = [];
+        const SEAT_PRICE = 350;
+        let sessionTimer = null;
+        let sessionEndTime = null;
+        let timerInterval = null;
+
+        // Fetch booked seats from server
+        async function loadBookedSeats() {
+            try {
+                const response = await fetch('/api/booked-seats');
+                bookedSeats = await response.json();
+                generateSeats();
+            } catch (error) {
+                console.error('Error loading booked seats:', error);
+                generateSeats();
+            }
+        }
+
+        // Generate seats
+        function generateSeats() {
+            const grid = document.getElementById('seatsGrid');
+            grid.innerHTML = '';
+
+            for (let i = 1; i <= 80; i++) {
+                const seat = document.createElement('div');
+                seat.className = 'seat';
+                seat.textContent = i;
+                seat.dataset.seatNumber = i;
+
+                if (bookedSeats.includes(i)) {
+                    seat.classList.add('booked');
+                } else {
+                    seat.onclick = () => toggleSeat(i, seat);
+                }
+
+                grid.appendChild(seat);
+            }
+        }
+
+        // Toggle seat selection
+        function toggleSeat(seatNum, seatElement) {
+            const index = selectedSeats.indexOf(seatNum);
+
+            if (index > -1) {
+                selectedSeats.splice(index, 1);
+                seatElement.classList.remove('selected');
+            } else {
+                selectedSeats.push(seatNum);
+                seatElement.classList.add('selected');
+            }
+
+            updateSummary();
+        }
+
+        // Update summary
+        function updateSummary() {
+            const count = selectedSeats.length;
+            const total = count * SEAT_PRICE;
+
+            document.getElementById('seatCount').textContent = count;
+            document.getElementById('totalPrice').textContent = total + ' SAR';
+            
+            if (count > 0) {
+                document.getElementById('selectedSeatsText').textContent = selectedSeats.sort((a, b) => a - b).join(', ');
+                document.getElementById('proceedBtn').disabled = false;
+            } else {
+                document.getElementById('selectedSeatsText').textContent = 'No seats selected';
+                document.getElementById('proceedBtn').disabled = true;
+            }
+        }
+
+        // Show payment section
+        function showPayment() {
+            document.getElementById('paymentSection').classList.add('active');
+            document.getElementById('paymentSection').scrollIntoView({ behavior: 'smooth' });
+            
+            // Start 2-minute session timer
+            startSessionTimer();
+        }
+
+        // Start session timer
+        function startSessionTimer() {
+            // Clear any existing timer
+            if (sessionTimer) {
+                clearTimeout(sessionTimer);
+            }
+            if (timerInterval) {
+                clearInterval(timerInterval);
+            }
+
+            // Set session end time (2 minutes from now)
+            sessionEndTime = Date.now() + (2 * 60 * 1000);
+            
+            // Show timer
+            document.getElementById('sessionTimer').classList.add('active');
+            
+            // Update timer display every second
+            timerInterval = setInterval(updateTimerDisplay, 1000);
+            
+            // Set timeout to cancel booking after 2 minutes
+            sessionTimer = setTimeout(() => {
+                cancelSession();
+            }, 2 * 60 * 1000);
+        }
+
+        // Update timer display
+        function updateTimerDisplay() {
+            const remainingTime = sessionEndTime - Date.now();
+            
+            if (remainingTime <= 0) {
+                document.getElementById('timerDisplay').textContent = '00:00';
+                return;
+            }
+            
+            const minutes = Math.floor(remainingTime / 60000);
+            const seconds = Math.floor((remainingTime % 60000) / 1000);
+            
+            document.getElementById('timerDisplay').textContent = 
+                `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+
+        // Cancel session and reset
+        function cancelSession() {
+            // Clear timers
+            if (sessionTimer) {
+                clearTimeout(sessionTimer);
+            }
+            if (timerInterval) {
+                clearInterval(timerInterval);
+            }
+            
+            // Hide timer and payment section
+            document.getElementById('sessionTimer').classList.remove('active');
+            document.getElementById('paymentSection').classList.remove('active');
+            
+            // Clear selected seats
+            selectedSeats = [];
+            
+            // Reset all seat selections in UI
+            const allSeats = document.querySelectorAll('.seat.selected');
+            allSeats.forEach(seat => {
+                seat.classList.remove('selected');
+            });
+            
+            // Update summary
+            updateSummary();
+            
+            // Show alert
+            alert('⏰ انتهى الوقت المحدد للحجز!\n\nالرجاء تحديد المقاعد مرة أخرى والمتابعة خلال دقيقتين.');
+            
+            // Scroll to seats section
+            document.querySelector('.seats-container').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Clear session timer
+        function clearSessionTimer() {
+            if (sessionTimer) {
+                clearTimeout(sessionTimer);
+            }
+            if (timerInterval) {
+                clearInterval(timerInterval);
+            }
+            document.getElementById('sessionTimer').classList.remove('active');
+        }
+
+        // Format card number
+        function formatCardNumber(input) {
+            let value = input.value.replace(/\s/g, '');
+            let formattedValue = value.match(/.{1,4}/g)?.join(' ') || value;
+            input.value = formattedValue;
+        }
+
+        // Format expiry date
+        function formatExpiry(input) {
+            let value = input.value.replace(/\D/g, '');
+            if (value.length >= 2) {
+                value = value.slice(0, 2) + '/' + value.slice(2, 4);
+            }
+            input.value = value;
+        }
+
+        // Process payment
+        async function processPayment(event) {
+            event.preventDefault();
+
+            // Validate data
+            const cardNumber = document.getElementById('cardNumber').value.replace(/\s/g, '');
+            const expiryDate = document.getElementById('expiryDate').value;
+            const cvv = document.getElementById('cvv').value;
+
+            // Validate card number length
+            if (cardNumber.length !== 16) {
+                alert('Card number must be 16 digits');
+                return;
+            }
+
+            // Validate expiry date
+            const [month, year] = expiryDate.split('/');
+            if (!month || !year || parseInt(month) > 12 || parseInt(month) < 1) {
+                alert('Invalid expiry date');
+                return;
+            }
+
+            // Check if the card is expired
+            const currentDate = new Date();
+            const currentYear = currentDate.getFullYear() % 100;
+            const currentMonth = currentDate.getMonth() + 1;
+
+            if (parseInt(year) < currentYear || (parseInt(year) === currentYear && parseInt(month) < currentMonth)) {
+                alert('Card is expired');
+                return;
+            }
+
+            // Validate CVV
+            if (cvv.length !== 3) {
+                alert('CVV must be 3 digits');
+                return;
+            }
+
+            // Send booking data to server
+            const bookingData = {
+                event: 'Elissa Concert',
+                seats: selectedSeats,
+                fullName: document.getElementById('fullName').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                total: selectedSeats.length * SEAT_PRICE
+            };
+
+            try {
+                const response = await fetch('/api/book', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(bookingData)
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    // Clear session timer
+                    clearSessionTimer();
+                    
+                    // Create booking number
+                    const bookingNumber = 'ALU' + result.bookingId.toString().padStart(8, '0');
+                    document.getElementById('bookingNumber').textContent = bookingNumber;
+
+                    // Show success message
+                    document.getElementById('successModal').classList.add('active');
+                } else {
+                    alert(result.message || 'Booking failed, please try again');
+                    // Reload booked seats
+                    await loadBookedSeats();
+                }
+            } catch (error) {
+                console.error('Booking error:', error);
+                alert('An error occurred during booking, please try again');
+            }
+        }
+
+        // Close modal
+        function closeModal() {
+            // Clear session timer if any
+            clearSessionTimer();
+            
+            document.getElementById('successModal').classList.remove('active');
+            window.location.href = '/';
+        }
+
+        // Initialize page
+        loadBookedSeats();
+    </script>
+
+<!-- قسم الاتصال -->
+<div class="contact-section">
+  <h2>Need an expert? Leave your info and we'll be in touch shortly</h2>
+  <div class="contact-grid">
+    <div class="contact-box">
+      <h3>VISIT US</h3>
+      <p>Come and visit us at our office and we'll help you with all your needs.<br><br> Alula, Saudi Arabia</p>
+    </div>
+    <div class="contact-box">
+      <h3>CALL US</h3>
+      <p>Feel free to give us a call, we are here to help you.<br><br>+966 55 555 555</p>
+    </div>
+    <div class="contact-box">
+      <h3>CONTACT US</h3>
+      <p>You can also contact us via email or our contact form.<br><br>alula@sa.com</p>
+    </div>
+  </div>
+</div>
+</body>
+</html>
